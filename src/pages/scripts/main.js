@@ -38,14 +38,22 @@ document.addEventListener("DOMContentLoaded", () => {
 		console.log(error);
 	}
 
-	// Function to toggle the menu
-	const toggleMenu = () => {
-		mobileMenu.classList.toggle("hidden");
-	};
+	try {
+		// Function to toggle the menu
+		const toggleMenu = () => {
+			mobileMenu.classList.toggle("hidden");
+		};
+	} catch (error) {
+		console.log(error);
+	}
 
-	// Event listeners for mobile menu
-	mobileMenuButton.addEventListener("click", toggleMenu);
-	closeMenuButton.addEventListener("click", toggleMenu);
+	try {
+		// Event listeners for mobile menu
+		mobileMenuButton.addEventListener("click", toggleMenu);
+		closeMenuButton.addEventListener("click", toggleMenu);
+	} catch (error) {
+		console.log("cannot get element toggleMenu");
+	}
 
 	/**
 	 * -------------------------------------------
