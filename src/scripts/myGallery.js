@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-	const API_URL = "http://192.168.29.118:3000/api/gallery";
+	const API_URL = "https://amy-s-blog-backend.onrender.com/api/gallery";
 
 	const imageGrid = document.getElementById("image-grid");
 	const fullscreenOverlay = document.getElementById("fullscreen-overlay");

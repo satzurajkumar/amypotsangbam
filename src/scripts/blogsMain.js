@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// --- CONFIG ---
 	// IMPORTANT: Replace this with the URL of your running backend server.
-	const API_URL = "http://192.168.29.118:3000/api";
+	const API_URL = "https://amy-s-blog-backend.onrender.com/api";
 
 	const postsContainer = document.getElementById("blog-posts-container");
 	const errorMessageContainer = document.getElementById("error-message");
