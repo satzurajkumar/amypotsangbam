@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Blogs - Amy Potsangbam</title>
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- FontAwsome CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+			integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
+		<link rel="stylesheet" href="../styles/output.css" />
+		<link rel="stylesheet" href="../styles/main.css" />
+	</head>
+	<body class="bg-white">
+		<!-- Fixed Navbar (Same as landing page) -->
+		<nav id="navbar" data-refer="blogs"></nav>
+
+		<!-- Main Content -->
+		<main class="pt-32 pb-16">
+			<div class="container mx-auto px-6 min-h-dvh">
+				<!-- Page Header -->
+				<header class="text-center mb-16">
+					<h1 class="text-4xl md:text-6xl font-serif text-dark">
+						From the Blog
+					</h1>
+					<p class="text-lg text-gray-600 mt-4">
+						Insights, tips, and stories to help you build your career.
+					</p>
+				</header>
+
+				<!-- Blog Posts List -->
+				<div
+					id="blog-posts-container"
+					class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+				>
+					<!-- Blog posts will be dynamically inserted here -->
+					<!-- Loading Skeleton -->
+					<div class="animate-pulse bg-gray-200 p-6 rounded-lg h-48"></div>
+					<div class="animate-pulse bg-gray-200 p-6 rounded-lg h-48"></div>
+					<div class="animate-pulse bg-gray-200 p-6 rounded-lg h-48"></div>
+				</div>
+
+				<!-- Error Message Container -->
+				<div
+					id="error-message"
+					class="hidden text-center text-red-500 bg-red-100 p-4 rounded-lg mt-8"
+				>
+					<!-- Error messages will be displayed here -->
+				</div>
+			</div>
+		</main>
+
+		<!-- Footer Section -->
+		<footer id="footer"></footer>
+		<!-- -------------------- -->
+		<script src="../scripts/footer.js"></script>
+		<script src="../scripts/main.js"></script>
+		<script src="../scripts/blogsMain.js"></script>
+		<script src="../scripts/navbar.js"></script>
+	</body>
+</html>

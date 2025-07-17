@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/* Custom styles to complement Tailwind and achieve the specific look */
+:root {
+	--color-text-header: rgba(51, 51, 51, 1);
+	--color-primary: #ffd66b; /* Yellow */
+	--color-secondary: #4f99b9; /* Teal */
+	--color-dark: #2c3e50; /* Dark Blue/Gray */
+	--color-light-bg: #f7fbfb; /* Very light teal/gray */
+}
+
+body {
+	font-family: "Poppins", sans-serif;
+	color: var(--color-dark);
+}
+
+h1,
+h2,
+h3,
+.font-serif {
+	font-family: "Playfair Display", serif;
+}
+
+.main-div {
+	min-height: 100dvh;
+	margin-top: 8rem;
+}
+
+.bg-secondary {
+	background-color: var(--color-secondary);
+}
+.bg-primary {
+	background-color: var(--color-primary);
+}
+.bg-light-bg {
+	background-color: var(--color-light-bg);
+}
+
+.text-secondary {
+	color: var(--color-secondary);
+}
+.text-dark {
+	color: var(--color-dark);
+}
+.text-header {
+	color: var(--color-text-header);
+}
+
+.btn-primary {
+	background-color: var(--color-secondary);
+	color: var(--color-light-bg);
+	border: 2px solid var(--color-dark);
+	transition: transform 0.2s ease-in-out;
+}
+.btn-primary:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+	background-color: transparent;
+	color: var(--color-dark);
+	border: 2px solid var(--color-dark);
+	transition: all 0.2s ease-in-out;
+}
+.btn-secondary:hover {
+	background-color: var(--color-dark);
+	color: white;
+}
+
+.as-seen-on-font {
+	font-family: "Playfair Display", serif;
+	font-weight: 700;
+}
+
+/* Decorative semi-circle shape */
+.shape-container {
+	position: relative;
+	z-index: 0;
+}
+
+.shape-container::before {
+	content: "";
+	position: absolute;
+	width: 150px;
+	height: 75px;
+	background-color: #e0f2f2;
+	border-top-left-radius: 150px;
+	border-top-right-radius: 150px;
+	bottom: 0;
+	left: -50px;
+	z-index: -1;
+}
+
+/* Background Gradient */
+.gradient-bg {
+	background: linear-gradient(to left, #4f99b9, #6f7e93);
+}
+
+/* --- Animation Styles --- */
+.animate-on-scroll {
+	opacity: 0;
+	transform: translateY(20px);
+	transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+}
+.animate-on-scroll.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Custom styles for the blog list */
+.blog-post-card {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.blog-post-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin Dashboard</title>
+
+		<!-- Tailwind CSS -->
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<!-- Chart.js for Analytics -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<link rel="stylesheet" href="../styles/dashboard.css" />
+	</head>
+	<body class="bg-gray-100 font-sans">
+		<!-- Login Screen -->
+		<div id="login-screen" class="flex items-center justify-center h-screen">
+			<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+				<h2 class="text-2xl font-bold mb-6 text-center">Admin Login</h2>
+				<form id="login-form">
+					<div class="mb-4">
+						<label for="username" class="block text-gray-700 mb-2"
+							>Username</label
+						>
+						<input
+							type="text"
+							id="username"
+							class="w-full p-3 border rounded-md"
+							required
+						/>
+					</div>
+					<div class="mb-6">
+						<label for="password" class="block text-gray-700 mb-2"
+							>Password</label
+						>
+						<input
+							type="password"
+							id="password"
+							class="w-full p-3 border rounded-md"
+							required
+						/>
+					</div>
+					<button
+						type="submit"
+						class="w-full bg-blue-500 text-white font-bold py-3 rounded-md hover:bg-blue-600"
+					>
+						Login
+					</button>
+					<p id="login-error" class="text-red-500 text-center mt-4"></p>
+				</form>
+			</div>
+		</div>
+
+		<!-- Main Dashboard UI (Initially Hidden) -->
+		<div id="dashboard-ui" class="hidden h-screen bg-gray-200">
+			<div class="flex h-full">
+				<!-- Sidebar -->
+				<div
+					id="sidebar"
+					class="w-64 bg-gray-800 text-white p-5 flex-shrink-0 flex flex-col"
+				>
+					<div class="text-2xl font-bold mb-10">Admin Panel</div>
+					<nav>
+						<a
+							href="#dashboard"
+							class="sidebar-link active flex items-center py-3 px-4 rounded"
+							>Dashboard</a
+						>
+						<a
+							href="#blogs"
+							class="sidebar-link flex items-center py-3 px-4 rounded mt-2"
+							>Blogs</a
+						>
+						<a
+							href="#portfolio"
+							class="sidebar-link flex items-center py-3 px-4 rounded mt-2"
+							>Media</a
+						>
+						<a
+							href="#portfolio"
+							class="sidebar-link flex items-center py-3 px-4 rounded mt-2"
+							>Settings</a
+						>
+					</nav>
+					<button
+						id="logout-button"
+						class="mt-auto flex items-center py-3 px-4 rounded text-red-400 hover:bg-red-500 hover:text-white"
+					>
+						Logout
+					</button>
+				</div>
+
+				<!-- Main Content -->
+				<div class="flex-1 flex flex-col overflow-hidden">
+					<header class="bg-white shadow-sm p-4">
+						<h1 id="page-title" class="text-2xl font-semibold text-gray-800">
+							Dashboard
+						</h1>
+					</header>
+					<main
+						class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6"
+					>
+						<!-- Dashboard Content -->
+						<div id="dashboard-content" class="content-panel">
+							<div class="bg-white p-6 rounded-lg shadow-md mt-6">
+								<h3 class="text-xl font-semibold mb-4">
+									Site Visitors (Last 7 Days)
+								</h3>
+								<canvas id="visitorsChart"></canvas>
+							</div>
+						</div>
+
+						<!-- Blogs Content -->
+						<div id="blogs-content" class="content-panel hidden">
+							<div class="bg-white p-6 rounded-lg shadow-md">
+								<h3 class="text-xl font-semibold mb-4">
+									Write a New Blog Post
+								</h3>
+								<form id="blog-form">
+									<input
+										type="text"
+										id="blog-title"
+										placeholder="Post Title"
+										class="w-full p-3 border rounded-md mb-4"
+										required
+									/>
+									<textarea
+										id="blog-content"
+										placeholder="Start writing..."
+										rows="10"
+										class="w-full p-3 border rounded-md mb-4"
+										required
+									></textarea>
+									<button
+										type="submit"
+										class="bg-blue-500 text-white font-bold py-2 px-6 rounded-md"
+									>
+										Publish Post
+									</button>
+								</form>
+							</div>
+							<div class="bg-white p-6 rounded-lg shadow-md mt-6">
+								<h3 class="text-xl font-semibold mb-4">
+									Manage Existing Posts
+								</h3>
+								<div class="overflow-x-auto">
+									<table class="w-full text-left">
+										<thead>
+											<tr class="border-b">
+												<th class="p-2">Title</th>
+												<th class="p-2">Date</th>
+												<th class="p-2">Actions</th>
+											</tr>
+										</thead>
+										<tbody id="blog-list"></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<!-- Portfolio Content (Placeholder) -->
+						<div id="portfolio-content" class="content-panel hidden">
+							<div class="bg-white p-6 rounded-lg shadow-md">
+								<h3 class="text-xl font-semibold mb-4">
+									<form
+										action="http://localhost:3000/api/gallery/upload"
+										method="post"
+										enctype="multipart/form-data"
+									>
+										<input type="file" name="image" accept="image/*" required />
+										<button type="submit">Upload</button>
+									</form>
+								</h3>
+							</div>
+						</div>
+					</main>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				// --- CONFIG ---
+				const API_URL = "http://localhost:3000/api"; // Your backend URL
+
+				// --- DOM Elements ---
+				const loginScreen = document.getElementById("login-screen");
+				const dashboardUI = document.getElementById("dashboard-ui");
+				const loginForm = document.getElementById("login-form");
+				const loginError = document.getElementById("login-error");
+				const logoutButton = document.getElementById("logout-button");
+				let visitorsChart;
+
+				// --- API Helper ---
+				const api = {
+					async get(endpoint, token) {
+						const res = await fetch(`${API_URL}${endpoint}`, {
+							headers: { Authorization: `Bearer ${token}` },
+						});
+						return res.json();
+					},
+					async post(endpoint, body, token) {
+						const res = await fetch(`${API_URL}${endpoint}`, {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify(body),
+						});
+						return res.json();
+					},
+					async del(endpoint, token) {
+						await fetch(`${API_URL}${endpoint}`, {
+							method: "DELETE",
+							headers: { Authorization: `Bearer ${token}` },
+						});
+					},
+				};
+
+				// --- Authentication ---
+				const auth = {
+					token: localStorage.getItem("token"),
+					login: async (username, password) => {
+						try {
+							const data = await api.post("/auth/login", {
+								username,
+								password,
+							});
+							if (data.token) {
+								auth.token = data.token;
+								localStorage.setItem("token", data.token);
+								auth.showDashboard();
+							} else {
+								loginError.textContent = data.msg || "Login failed.";
+							}
+						} catch (e) {
+							loginError.textContent = "An error occurred.";
+						}
+					},
+					logout: () => {
+						auth.token = null;
+						localStorage.removeItem("token");
+						loginScreen.style.display = "flex";
+						dashboardUI.style.display = "none";
+					},
+					showDashboard: () => {
+						loginScreen.style.display = "none";
+						dashboardUI.style.display = "block";
+						initDashboard();
+					},
+					check: () => {
+						if (auth.token) auth.showDashboard();
+					},
+				};
+
+				loginForm.addEventListener("submit", (e) => {
+					e.preventDefault();
+					const username = document.getElementById("username").value;
+					const password = document.getElementById("password").value;
+					auth.login(username, password);
+				});
+				logoutButton.addEventListener("click", auth.logout);
+
+				// --- Dashboard Initialization ---
+				const initDashboard = () => {
+					loadAnalytics();
+					loadBlogPosts();
+					setupNavigation();
+					setupBlogForm();
+				};
+
+				// --- Analytics ---
+				const loadAnalytics = async () => {
+					const data = await api.get("/analytics/visitors", auth.token);
+					if (visitorsChart) visitorsChart.destroy();
+					const ctx = document.getElementById("visitorsChart").getContext("2d");
+					visitorsChart = new Chart(ctx, {
+						type: "line",
+						data: {
+							labels: data.labels,
+							datasets: [
+								{
+									label: "Unique Visitors",
+									data: data.data,
+									borderColor: "#3b82f6",
+									tension: 0.1,
+								},
+							],
+						},
+					});
+				};
+
+				// --- Blog Management ---
+				const blogList = document.getElementById("blog-list");
+				const loadBlogPosts = async () => {
+					const posts = await api.get("/blogs", auth.token);
+					blogList.innerHTML = "";
+					posts.forEach((post) => {
+						const row = document.createElement("tr");
+						row.innerHTML = `
+                        <td class="p-2">${post.title}</td>
+                        <td class="p-2">${new Date(
+													post.created_at
+												).toLocaleDateString()}</td>
+                        <td class="p-2"><button data-id="${
+													post.id
+												}" class="delete-post-btn text-red-500">Delete</button></td>
+                    `;
+						blogList.appendChild(row);
+					});
+				};
+
+				const setupBlogForm = () => {
+					const blogForm = document.getElementById("blog-form");
+					blogForm.addEventListener("submit", async (e) => {
+						e.preventDefault();
+						const title = document.getElementById("blog-title").value;
+						const content = document.getElementById("blog-content").value;
+						await api.post("/blogs", { title, content }, auth.token);
+						blogForm.reset();
+						loadBlogPosts();
+					});
+				};
+
+				blogList.addEventListener("click", async (e) => {
+					if (e.target.classList.contains("delete-post-btn")) {
+						const id = e.target.dataset.id;
+						if (confirm("Are you sure you want to delete this post?")) {
+							await api.del(`/blogs/${id}`, auth.token);
+							loadBlogPosts();
+						}
+					}
+				});
+
+				// --- Navigation ---
+				const setupNavigation = () => {
+					const links = document.querySelectorAll(".sidebar-link");
+					const panels = document.querySelectorAll(".content-panel");
+					const pageTitle = document.getElementById("page-title");
+
+					links.forEach((link) => {
+						link.addEventListener("click", (e) => {
+							e.preventDefault();
+							const targetId =
+								link.getAttribute("href").substring(1) + "-content";
+
+							links.forEach((l) => l.classList.remove("active"));
+							link.classList.add("active");
+
+							panels.forEach((p) => p.classList.add("hidden"));
+							document.getElementById(targetId).classList.remove("hidden");
+
+							pageTitle.textContent = link.textContent.trim();
+						});
+					});
+				};
+
+				// --- Initial Check ---
+				auth.check();
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>An Online Business - Freedom in How You Work</title>
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- FontAwsome CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+			integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="../styles/output.css" />
+		<link rel="stylesheet" href="../styles/main.css" />
+	</head>
+	<body class="bg-white">
+		<!-- Fixed Navbar -->
+		<nav id="navbar" class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+			<div class="mx-auto px-10">
+				<div class="flex justify-between items-center h-20">
+					<!-- Logo -->
+					<a href="#" class="text-2xl font-serif font-bold text-dark"
+						>Amy Potsangbam</a
+					>
+
+					<!-- Desktop Menu -->
+					<div class="hidden md:flex space-x-8">
+						<a
+							href="./blogs.html"
+							class="text-gray-600 hover:text-secondary hover:font-semibold"
+							>Blogs</a
+						>
+
+						<a
+							href="./resources.html"
+							class="text-gray-600 hover:text-secondary hover:font-semibold"
+							>Resources</a
+						>
+						<a
+							href="./about.html"
+							class="text-gray-600 hover:text-secondary hover:font-semibold"
+							>About me</a
+						>
+						<a
+							href="./gallery.html"
+							class="text-gray-600 hover:text-secondary hover:font-semibold"
+							>My Gallery</a
+						>
+
+						<a
+							href="./contact.html"
+							class="text-gray-600 hover:text-secondary hover:font-semibold"
+							>Contacts</a
+						>
+					</div>
+
+					<!-- Mobile Menu Button -->
+					<div class="md:hidden">
+						<button
+							id="mobile-menu-button"
+							class="text-dark focus:outline-none"
+						>
+							<svg
+								class="w-6 h-6"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M4 6h16M4 12h16m-7 6h7"
+								></path>
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mobile Menu -->
+			<div id="mobile-menu" class="hidden md:hidden">
+				<div
+					class="absolute top-0 left-0 w-full h-screen bg-white flex flex-col items-center justify-center"
+				>
+					<button
+						id="close-menu-button"
+						class="absolute top-7 right-6 text-dark focus:outline-none"
+					>
+						<svg
+							class="w-7 h-7"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M6 18L18 6M6 6l12 12"
+							></path>
+						</svg>
+					</button>
+					<a
+						href="./blogs.html"
+						class="block text-2xl py-4 text-gray-600 hover:text-secondary"
+						>Blogs</a
+					>
+
+					<a
+						href="./resources.html"
+						class="block text-2xl py-4 text-gray-600 hover:text-secondary"
+						>Resources</a
+					>
+					<a
+						href="./about.html"
+						class="block text-2xl py-4 text-gray-600 hover:text-secondary"
+						>About me</a
+					>
+					<a
+						href="./gallery.html"
+						class="block text-2xl py-4 text-gray-600 hover:text-secondary"
+						>My Gallery</a
+					>
+
+					<a
+						href="./contact.html"
+						class="block text-2xl py-4 text-gray-600 hover:text-secondary"
+						>Contacts</a
+					>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Header/Hero Section -->
+		<header
+			class="h-lvh bg-[url(../../public/static/images/hero_bg.png)] md:bg-no-repeat md:bg-cover md:bg-center"
+		>
+			<!-- This div  acts as a flex container to center its content both horizontally and vertically -->
+			<div
+				class="min-h-lvh flex flex-col items-center justify-center px-10 text-center gradient-bg/20 backdrop-blur-md"
+			>
+				<h1
+					class="text-4xl pt-28 sm:text-6xl font-serif text-white leading-tight"
+					style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)"
+				>
+					My take on Nursing as a career ~<br /><span
+						class="font-[Lobster] text-2xl"
+						>Sharing my experience</span
+					>
+				</h1>
+				<p
+					class="sm:text-xl text-lg text-white mt-4 font-semibold"
+					style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)"
+				>
+					Mission/goal-driven strategies | Exam &amp;Interview Resources|
+					Work-life balance
+				</p>
+
+				<div
+					class="max-w-4xl mx-auto text-left rounded-xl p-8 mt-[1rem] xl:mt[4rem] overflow-hidden bg-white/50 backdrop-blur-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out animate-on-scroll"
+				>
+					<span class="text-emerald-600 font-bold">FREE GUIDE!</span>
+					<p
+						class="text-xl md:text-2xl font-bold text-grey-200 mb-6 leading-tight"
+					>
+						RECOMMENDED FIRST 10 STEPS FOR A BEGINNER IN NURSING & HEALTHCARE
+					</p>
+					<!-- This div acts as a container for the entire subscription form, centering its content. -->
+					<div
+						class="flex flex-col items-center justify-center p-4 sm:p-6 bg-white rounded-lg shadow-lg max-w-sm sm:max-w-lg mx-auto my-6 sm:my-8"
+					>
+						<!-- Added a form tag for better semantic structure and potential form submission handling. -->
+						<form class="w-full">
+							<!-- This div groups the email input and subscribe button together. -->
+							<!-- Ensures elements stack on small screens and are side-by-side on larger screens. -->
+							<div
+								class="flex flex-col sm:flex-row items-center w-full space-y-3 sm:space-y-0 sm:space-x-3 mb-4"
+							>
+								<!-- Email input field -->
+								<!-- Ensured full width on mobile, and flexible width on larger screens. -->
+								<input
+									type="email"
+									id="emailInput"
+									placeholder="Enter your email address"
+									aria-label="Email address for subscription"
+									class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-gray-800 placeholder-gray-400 w-full"
+									required
+								/>
+								<!-- Subscribe button -->
+								<!-- Ensured full width on mobile, and auto width on larger screens. -->
+								<button
+									type="submit"
+									class="px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg shadow-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition duration-300 ease-in-out w-full sm:w-auto"
+								>
+									Subscribe
+								</button>
+							</div>
+						</form>
+
+						<!-- Disclaimer text below the input and button. Initially hidden. -->
+						<!-- Adjusted text size for better readability on smaller screens. -->
+						<p
+							id="disclaimerText"
+							class="mt-2 text-center text-gray-600 text-xs leading-relaxed max-w-xs sm:max-w-md hidden"
+						>
+							AmyPotsangbam.com needs the contact information you provide to us
+							to contact you about our products and services. You may
+							unsubscribe from these communications at anytime. See our
+							<!-- Link to the privacy policy -->
+							<a
+								href="/privacy-policy"
+								class="text-teal-600 hover:text-teal-800 underline font-medium"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								privacy policy
+							</a>
+							for terms and conditions and to learn how we protect your data.
+						</p>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<!-- About Section -->
+			<section class="py-16 md:py-24 shape-container">
+				<div class="container mx-auto px-6">
+					<div class="grid md:grid-cols-2 gap-12 items-center">
+						<div class="text-center md:text-left animate-on-scroll">
+							<p class="text-secondary font-semibold tracking-wider">
+								I'M AMY,
+							</p>
+							<h2 class="text-3xl md:text-5xl font-serif text-dark mt-2">
+								I'm a Nurse currently working on my dream project, now I'm my
+								own boss.
+							</h2>
+							<p class="mt-6 text-gray-600">
+								In the last 10+ years, I’ve worked in multiple Healthcare
+								organizations, and helped multiple newcomers find a suitable
+								career in Healthcare.
+							</p>
+							<p class="mt-4 text-gray-600">
+								I'll help you take what you already know, love, and do, and turn
+								it into a successful career that will be ideal for your prefered
+								lifestyle.
+							</p>
+							<a
+								href="#"
+								class="inline-block btn-secondary font-bold py-3 px-8 rounded-md mt-8"
+								>START YOUR CAREER HERE</a
+							>
+						</div>
+						<div class="flex justify-center animate-on-scroll">
+							<img
+								src="../../public/static/images/ams.jpg"
+								alt="Amy Potsangbam"
+								class="rounded-lg shadow-xl w-[500px] h-[600px] object-cover object-center"
+							/>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- As Seen On Section -->
+			<section class="bg-light-bg py-12 animate-on-scroll">
+				<div class="container mx-auto px-6 text-center">
+					<p class="font-semibold text-gray-500 tracking-widest">
+						WORK HISTORY:
+					</p>
+					<div
+						class="flex justify-center items-center space-x-8 md:space-x-16 mt-6 flex-wrap"
+					>
+						<span class="as-seen-on-font text-2xl text-gray-400"
+							>HAYAT HOSPITAL</span
+						>
+						<span class="as-seen-on-font text-2xl text-gray-400"
+							>RAJ MEDICITY</span
+						>
+						<span class="as-seen-on-font text-2xl text-gray-400"
+							>MANIPAL HOSPITAL</span
+						>
+					</div>
+				</div>
+			</section>
+
+			<!-- Email List Callout Section -->
+			<section class="py-16 md:py-24">
+				<div
+					class="container mx-auto px-6 text-center max-w-3xl animate-on-scroll"
+				>
+					<div class="relative">
+						<img
+							src="../../public/static/images/career growth ilus.avif"
+							alt="Hand holding a phone"
+							class="mx-auto rounded-lg shadow-lg w-[300px] h-[450px] object-cover object-center"
+						/>
+					</div>
+					<h2 class="text-3xl md:text-5xl font-serif text-dark mt-12">
+						Your career will be only as successful as your newtorking.
+					</h2>
+					<p class="font-serif text-lg text-gray-500 mt-2">
+						(Let that sink in.)
+					</p>
+					<p class="mt-6 text-gray-600">
+						To have a successful career, it's essential to build strong
+						relationships with your future colleagues, supervisors, and team
+						leaders.
+					</p>
+					<a
+						href="#"
+						class="inline-block btn-primary font-bold py-3 px-8 rounded-md mt-6"
+						>START BUILDING YOUR PROFESSIONAL NETWORK</a
+					>
+				</div>
+			</section>
+
+			<!-- Start Here Guide Section -->
+			<section class="bg-light-bg py-16 md:py-24">
+				<div class="container mx-auto px-6 text-center animate-on-scroll">
+					<p class="text-secondary font-semibold tracking-wider">
+						START SMALL. START SIMPLY.
+					</p>
+					<h2 class="text-4xl md:text-6xl font-serif text-dark mt-2">
+						START HERE.
+					</h2>
+					<div class="w-24 h-1 bg-primary mx-auto mt-4 mb-8"></div>
+					<p class="text-gray-600">Download my FREE resource:</p>
+					<div class="max-w-sm mx-auto mt-8">
+						<img
+							src="../../public/static/images/guide_cover.png"
+							alt="The Cheat Sheet guide cover"
+							class="rounded-lg shadow-2xl mx-auto w-[350] h-[450] object-center object-cover"
+						/>
+						<h3 class="text-2xl font-serif mt-6">
+							The First 10 Steps to successful career in nursing
+						</h3>
+						<p class="mt-4 text-gray-600">
+							This cheat sheet breaks down the first 10 things you should do
+							when you&#39;re just starting out.
+						</p>
+						<a
+							href="#"
+							class="inline-block btn-primary font-bold py-3 px-8 rounded-md mt-6"
+							>DOWNLOAD THE CHEAT SHEET</a
+						>
+					</div>
+				</div>
+			</section>
+
+			<!-- Podcast Section -->
+			<section class="py-16 md:py-24 bg-white overflow-hidden">
+				<div class="container mx-auto px-6">
+					<div
+						class="grid md:grid-cols-2 gap-12 items-center animate-on-scroll"
+					>
+						<div class="text-center md:text-left">
+							<p class="text-secondary font-semibold tracking-wider">
+								THE AMY POTSANGBAM GUIDE
+							</p>
+							<h2 class="text-3xl md:text-5xl font-serif text-dark mt-2">
+								Career strategy galore
+							</h2>
+							<p class="mt-6 text-gray-600">
+								If you're ready for a step-by-step, take-you-by-the-hand
+								approach to building and growing your career, you're in the
+								right place.
+							</p>
+							<div class="flex justify-center md:justify-start space-x-12 mt-8">
+								<div>
+									<span class="block text-4xl font-bold text-secondary"
+										>6000+</span
+									>
+									<span
+										class="block text-sm font-semibold text-gray-500 tracking-wider"
+										>DOWNLOADS</span
+									>
+								</div>
+								<div>
+									<span class="block text-4xl font-bold text-secondary"
+										>500+</span
+									>
+									<span
+										class="block text-sm font-semibold text-gray-500 tracking-wider"
+										>5-STAR REVIEWS</span
+									>
+								</div>
+							</div>
+						</div>
+						<div class="flex justify-center">
+							<img
+								src="../../public/static/images/nurse_with_coat.png"
+								alt="Podcast img"
+								class="rounded-2xl shadow-xl transform md:rotate-6 w-[300px] h-[600] object-center object-cover"
+							/>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script>
+			// This script handles the visibility of the disclaimer text based on email input focus.
+			document.addEventListener("DOMContentLoaded", () => {
+				// Get references to the email input and the disclaimer paragraph by their IDs.
+				const emailInput = document.getElementById("emailInput");
+				const disclaimerText = document.getElementById("disclaimerText");
+
+				// Ensure both elements exist before adding event listeners.
+				if (emailInput && disclaimerText) {
+					// Add an event listener for when the email input gains focus.
+					emailInput.addEventListener("focus", () => {
+						// When focused, remove the 'hidden' class and add 'block' to make it visible.
+						disclaimerText.classList.remove("hidden");
+						disclaimerText.classList.add("block");
+					});
+
+					// Add an event listener for when the email input loses focus.
+					emailInput.addEventListener("blur", () => {
+						// When blurred, remove 'block' and add 'hidden' to hide it again.
+						disclaimerText.classList.remove("block");
+						disclaimerText.classList.add("hidden");
+					});
+				}
+			});
+		</script>
+
+		<!-- Footer Section -->
+		<footer id="footer"></footer>
+		<!-- -------------------- -->
+		<script src="../scripts/footer.js"></script>
+		<script src="../scripts/main.js"></script>
+		<script src="../scripts/heroSubsForm.js"></script>
+	</body>
+</html>

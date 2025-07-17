@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Contact Me - Amy Potsangbam</title>
+
+		<!-- Google Fonts: Playfair Display for headings, Inter for body -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:wght@700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- FontAwsome CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+			integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
+		<link rel="stylesheet" href="../styles/output.css" />
+		<link rel="stylesheet" href="../styles/main.css" />
+		<link rel="stylesheet" href="../styles/contactNoRequestPopUp.css" />
+	</head>
+	<body class="bg-gray-50">
+		<!-- Navbar will be injected here (navbar.js handles this) -->
+		<nav id="navbar" data-refer="contact"></nav>
+		<!-- Message box for client-side messages (e.g., form submissions) -->
+		<div
+			id="message-box"
+			class="fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg text-white hidden"
+		></div>
+
+		<!-- Main Content -->
+		<main class="pb-16 overflow-x-hidden main-div">
+			<div class="container mx-auto px-6">
+				<!-- Page Header -->
+				<header class="text-center mb-4 animate-on-scroll">
+					<h1 class="text-5xl md:text-6xl font-serif text-dark">
+						Get In Touch
+					</h1>
+					<p class="text-lg text-gray-600 mt-4">
+						I'd love to hear from you. Let's connect!
+					</p>
+				</header>
+				<!-- The Modal Overlay -->
+				<div id="contactModal" class="modal-overlay">
+					<!-- The Modal Content -->
+					<div class="modal-content">
+						<button class="modal-close-button" id="closeModalBtn">
+							&times;
+						</button>
+						<h2 class="text-2xl font-semibold mb-4 text-gray-800">
+							Contact me
+						</h2>
+						<form id="contactForm" class="modal-form">
+							<div class="mb-4">
+								<label
+									for="name"
+									class="block text-gray-700 text-sm font-medium mb-1"
+									>Name</label
+								>
+								<input
+									type="text"
+									id="name"
+									name="name"
+									placeholder="Your Name"
+									required
+								/>
+							</div>
+							<div class="mb-4">
+								<label
+									for="email"
+									class="block text-gray-700 text-sm font-medium mb-1"
+									>Email</label
+								>
+								<input
+									type="email"
+									id="email"
+									name="email"
+									placeholder="your.email@example.com"
+									required
+								/>
+							</div>
+							<div class="mb-4">
+								<label
+									for="phone"
+									class="block text-gray-700 text-sm font-medium mb-1"
+									>Phone Number</label
+								>
+								<input
+									type="tel"
+									id="phone"
+									name="phone"
+									placeholder="e.g., +9134567890"
+									required
+								/>
+							</div>
+							<div class="mb-6">
+								<label
+									for="reason"
+									class="block text-gray-700 text-sm font-medium mb-1"
+									>Reason for Contact</label
+								>
+								<textarea
+									id="reason"
+									name="reason"
+									placeholder="Briefly describe why you'd like contact me"
+									rows="4"
+								></textarea>
+							</div>
+							<button type="submit">Submit Request</button>
+						</form>
+					</div>
+				</div>
+
+				<!-- Contact Grid -->
+				<div
+					class="bg-white p-8 md:p-12 rounded-lg shadow-xl animate-on-scroll"
+				>
+					<div class="grid md:grid-cols-2 gap-12">
+						<!-- Left Column: Details & Socials -->
+						<div>
+							<h2 class="text-3xl font-bold mb-6 text-dark">
+								Contact Information
+							</h2>
+
+							<div class="space-y-6 text-lg">
+								<div class="flex items-start">
+									<svg
+										class="w-6 h-6 mr-4 mt-1 text-secondary"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+										></path>
+									</svg>
+									<div>
+										<h3 class="font-semibold text-dark">Phone</h3>
+										<button
+											class="inline-block btn-secondary font-bold py-2 px-6 rounded-md"
+											id="requestPhoneNoBtn"
+										>
+											Request Phone No.
+										</button>
+									</div>
+								</div>
+								<div class="flex items-start">
+									<svg
+										class="w-6 h-6 mr-4 mt-1 text-secondary"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+										></path>
+									</svg>
+									<div>
+										<h3 class="font-semibold text-dark">Email</h3>
+										<p class="text-gray-600">hello@amypotsangbam.com</p>
+									</div>
+								</div>
+								<div class="flex items-start">
+									<svg
+										class="w-6 h-6 mr-4 mt-1 text-secondary"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+										></path>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+										></path>
+									</svg>
+									<div>
+										<h3 class="font-semibold text-dark">Address</h3>
+										<p class="text-gray-600">Imphal, Manipur, India</p>
+									</div>
+								</div>
+							</div>
+
+							<h3 class="text-2xl font-bold mt-12 mb-4 text-dark">Follow Me</h3>
+							<div class="flex space-x-4">
+								<!-- Social Icons -->
+								<a
+									href="#"
+									class="text-gray-500 hover:text-secondary transition-colors"
+									title="Facebook"
+								>
+									<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+										<path
+											d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v2.385z"
+										></path>
+									</svg>
+								</a>
+								<a
+									href="https://www.instagram.com/amy_potsangbam"
+									class="text-gray-500 hover:text-secondary transition-colors"
+									title="Instagram"
+								>
+									<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+										<path
+											d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.947s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"
+										></path>
+									</svg>
+								</a>
+								<a
+									href="#"
+									class="text-gray-500 hover:text-secondary transition-colors"
+									title="LinkedIn"
+								>
+									<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+										<path
+											d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"
+										></path>
+									</svg>
+								</a>
+							</div>
+						</div>
+
+						<!-- Right Column: Contact Form -->
+						<div>
+							<h2 class="text-3xl font-bold mb-6 text-dark">Send a Mail</h2>
+							<form action="#" method="POST">
+								<div class="space-y-6">
+									<div>
+										<label for="name" class="block font-semibold mb-2 text-dark"
+											>Your Name</label
+										>
+										<input
+											type="text"
+											id="name"
+											name="name"
+											class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary focus:outline-none"
+											required
+										/>
+									</div>
+									<div>
+										<label
+											for="email"
+											class="block font-semibold mb-2 text-dark"
+											>Your Email</label
+										>
+										<input
+											type="email"
+											id="email"
+											name="email"
+											class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary focus:outline-none"
+											required
+										/>
+									</div>
+									<div>
+										<label
+											for="message"
+											class="block font-semibold mb-2 text-dark"
+											>Message</label
+										>
+										<textarea
+											id="message"
+											name="message"
+											rows="6"
+											class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-secondary focus:outline-none"
+											required
+										></textarea>
+									</div>
+									<div>
+										<button
+											type="submit"
+											style="background-color: var(--color-secondary)"
+											class="w-full text-white font-bold py-4 px-8 rounded-md hover:bg-opacity-90 transition-colors"
+										>
+											Send Message
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- Footer Section -->
+		<footer id="footer"></footer>
+		<!-- -------------------- -->
+		<script src="../scripts/footer.js"></script>
+
+		<!-- JavaScript for Navbar (assuming it injects HTML) -->
+		<script src="../scripts/main.js"></script>
+		<script src="../scripts/contactNoRequestPopUp.js"></script>
+		<script src="../scripts/navbar.js"></script>
+		<!-- JavaScript for animation -->
+
+		<!-- JavaScript for Client-side message box functionality -->
+		<script src="../scripts/contact.js"></script>
+	</body>
+</html>

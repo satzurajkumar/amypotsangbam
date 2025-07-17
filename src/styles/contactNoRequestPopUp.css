@@ -1,0 +1,88 @@
+/* Modal Overlay Styles */
+.modal-overlay {
+	position: fixed; /* Fixed position to cover the entire viewport */
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+	display: flex; /* Use flexbox for centering */
+	justify-content: center; /* Center horizontally */
+	align-items: center; /* Center vertically */
+	z-index: 1000; /* Ensure it's on top of other content */
+	opacity: 0; /* Initially hidden */
+	visibility: hidden; /* Initially not visible to screen readers/interactions */
+	transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Smooth transition for appearance */
+}
+
+/* Show state for the modal overlay */
+.modal-overlay.show {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Modal Content Styles */
+.modal-content {
+	background-color: white;
+	padding: 2rem;
+	border-radius: 0.5rem; /* Rounded corners for the modal box */
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); /* Subtle shadow */
+	width: 90%; /* Responsive width */
+	max-width: 500px; /* Max width to prevent it from getting too wide on large screens */
+	position: relative; /* Needed for absolute positioning of the close button */
+	transform: translateY(-20px); /* Initial state for entry animation */
+	transition: transform 0.3s ease-in-out; /* Smooth transition for content movement */
+}
+
+/* Animation for modal content when shown */
+.modal-overlay.show .modal-content {
+	transform: translateY(0); /* Move to original position when shown */
+}
+
+/* Close Button Styles */
+.modal-close-button {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: none;
+	border: none;
+	font-size: 1.5rem; /* Larger font size for the 'X' */
+	cursor: pointer;
+	color: #666; /* Gray color */
+	transition: color 0.2s ease-in-out;
+}
+.modal-close-button:hover {
+	color: #333; /* Darker on hover */
+}
+
+/* Form Input Styles */
+.modal-form input[type="text"],
+.modal-form input[type="email"],
+.modal-form input[type="tel"],
+.modal-form textarea {
+	width: 100%; /* Full width inputs */
+	padding: 0.75rem;
+	margin-bottom: 1rem; /* Space between fields */
+	border: 1px solid #ccc; /* Light gray border */
+	border-radius: 0.375rem; /* Rounded corners */
+	font-size: 1rem;
+	box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+.modal-form textarea {
+	min-height: 100px; /* Minimum height for textarea */
+	resize: vertical; /* Allow vertical resizing only */
+}
+.modal-form button[type="submit"] {
+	width: 100%; /* Full width submit button */
+	padding: 0.75rem;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 0.375rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+}
+.modal-form button[type="submit"]:hover {
+	background-color: #0056b3;
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Blog Post</title>
+		<!-- Title will be updated dynamically -->
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- FontAwsome CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+			integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
+		<link rel="stylesheet" href="../styles/output.css" />
+		<link rel="stylesheet" href="../styles/main.css" />
+		<style>
+			/* Styles for the blog content area */
+			.blog-content h2 {
+				font-size: 1.875rem; /* 3xl */
+				font-family: "Playfair Display", serif;
+				margin-top: 2rem;
+				margin-bottom: 1rem;
+			}
+			.blog-content p {
+				margin-bottom: 1.5rem;
+				line-height: 1.75;
+			}
+			.blog-content a {
+				color: var(--color-secondary);
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+	<body class="bg-white">
+		<!-- Fixed Navbar -->
+		<nav id="navbar" class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+			<div class="container mx-auto px-6">
+				<div class="flex justify-between items-center h-20">
+					<a href="index.html" class="text-2xl font-serif font-bold text-dark"
+						>Amy Potsangbam</a
+					>
+					<div class="hidden md:flex space-x-8">
+						<a
+							href="../pages/blogs.html"
+							class="text-gray-600 hover:text-secondary"
+							>Blogs</a
+						>
+						<a
+							href="../pages/about.html"
+							class="text-gray-600 hover:text-secondary"
+							>About me</a
+						>
+						<a href="#" class="text-gray-600 hover:text-secondary">Resources</a>
+						<a href="#" class="text-gray-600 hover:text-secondary"
+							>Contact me</a
+						>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Main Content -->
+		<main class="pt-32 pb-16">
+			<div id="post-container" class="container mx-auto px-6 max-w-3xl">
+				<!-- Loading State -->
+				<div id="loading-state">
+					<div class="animate-pulse h-12 bg-gray-200 rounded w-3/4 mb-4"></div>
+					<div class="animate-pulse h-6 bg-gray-200 rounded w-1/4 mb-8"></div>
+					<div class="animate-pulse h-80 bg-gray-200 rounded"></div>
+				</div>
+
+				<!-- Post content will be dynamically inserted here -->
+				<article id="blog-article" class="hidden">
+					<header>
+						<h1
+							id="post-title"
+							class="text-4xl md:text-5xl font-serif text-dark leading-tight"
+						></h1>
+						<p id="post-date" class="text-gray-500 mt-4"></p>
+					</header>
+					<div id="post-content" class="blog-content mt-8 text-lg"></div>
+				</article>
+
+				<!-- Error Message -->
+				<div id="error-message" class="hidden text-center">
+					<h2 class="text-3xl font-serif">Post Not Found</h2>
+					<p class="mt-4">
+						Sorry, we couldn't find the post you were looking for.
+					</p>
+					<a
+						href="../pages/blogs.html"
+						class="inline-block mt-6 text-secondary font-semibold hover:underline"
+						>&larr; Back to all posts</a
+					>
+				</div>
+			</div>
+		</main>
+
+		<!-- Footer Section -->
+		<footer id="footer"></footer>
+		<!-- -------------------- -->
+		<script src="../scripts/footer.js"></script>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				const API_URL = "http://192.168.29.118:3000/api";
+
+				const loadingState = document.getElementById("loading-state");
+				const blogArticle = document.getElementById("blog-article");
+				const errorMessage = document.getElementById("error-message");
+
+				const postTitle = document.getElementById("post-title");
+				const postDate = document.getElementById("post-date");
+				const postContent = document.getElementById("post-content");
+
+				/**
+				 * Fetches a single blog post by its ID and renders it.
+				 */
+				const fetchSinglePost = async () => {
+					// Get post ID from URL (e.g., ?id=1)
+					const params = new URLSearchParams(window.location.search);
+					const postId = params.get("id");
+
+					if (!postId) {
+						showError();
+						return;
+					}
+
+					try {
+						const response = await fetch(`${API_URL}/blogs/${postId}`);
+
+						if (!response.ok) {
+							throw new Error("Post not found");
+						}
+
+						const post = await response.json();
+
+						// Populate the page with the fetched data
+						document.title = post.title; // Update the page tab title
+						postTitle.textContent = post.title;
+						postDate.textContent = `Published on ${new Date(
+							post.created_at
+						).toLocaleDateString("en-US", {
+							year: "numeric",
+							month: "long",
+							day: "numeric",
+						})}`;
+						postContent.innerHTML = post.content; // Use .innerHTML to render any HTML in the content
+
+						// Show the article and hide loading state
+						loadingState.classList.add("hidden");
+						blogArticle.classList.remove("hidden");
+					} catch (error) {
+						console.error("Error fetching single post:", error);
+						showError();
+					}
+				};
+
+				const showError = () => {
+					loadingState.classList.add("hidden");
+					errorMessage.classList.remove("hidden");
+				};
+
+				fetchSinglePost();
+			});
+		</script>
+	</body>
+</html>

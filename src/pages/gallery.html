@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>My Gallery - Amy Potsangbam</title>
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- FontAwsome CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+			integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<link rel="stylesheet" href="../styles/output.css" />
+		<link rel="stylesheet" href="../styles/main.css" />
+		<link rel="stylesheet" href="../styles/gallery.css" />
+
+		<!-- Tailwind CSS for utility classes -->
+		<!-- <script src="https://cdn.tailwindcss.com"></script> -->
+	</head>
+	<body class="bg-white">
+		<!-- Fixed Navbar -->
+		<nav id="navbar" data-refer="gallery"></nav>
+
+		<!-- Main Content -->
+		<main class="pb-16 main-div">
+			<div class="container mx-auto px-6">
+				<header class="text-center mb-16">
+					<h1 class="text-4xl md:text-6xl font-serif text-dark">My Gallery</h1>
+					<p class="text-lg text-gray-600 mt-4">
+						A collection of moments from workshops, travels, and daily life.
+					</p>
+				</header>
+
+				<!-- Image Grid -->
+				<div
+					id="image-grid"
+					class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+				>
+					<!-- Loading Skeleton -->
+					<div class="animate-pulse bg-gray-200 rounded-lg h-48"></div>
+					<div class="animate-pulse bg-gray-200 rounded-lg h-48"></div>
+					<div class="animate-pulse bg-gray-200 rounded-lg h-48"></div>
+					<div class="animate-pulse bg-gray-200 rounded-lg h-48"></div>
+				</div>
+				<!-- Error Message Container -->
+				<div
+					id="error-message"
+					class="hidden text-center text-red-500 bg-red-100 p-4 rounded-lg mt-8"
+				></div>
+			</div>
+		</main>
+
+		<!-- Fullscreen Image Viewer -->
+		<div id="fullscreen-overlay">
+			<img id="fullscreen-image" src="" alt="Fullscreen view" />
+		</div>
+
+		<!-- Footer Section -->
+		<footer id="footer"></footer>
+		<!-- -------------------- -->
+		<script src="../scripts/footer.js"></script>
+
+		<script src="../scripts/myGallery.js"></script>
+		<script src="../scripts/navbar.js"></script>
+	</body>
+</html>
