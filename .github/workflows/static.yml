@@ -34,11 +34,11 @@ jobs:
 
       - name: Prepare dist folder
         run: |
-          mkdir dist
+          mkdir -p dist
           cp -r src/pages/* dist/
-          cp -r src/styles/ dist/
-          cp -r src/scripts/* dist/
-          cp -r public/static/images dist/static
+          cp -r src/styles dist/
+          cp -r src/scripts dist/
+          cp -r public/static dist/static
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
