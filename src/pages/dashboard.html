@@ -5,12 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Admin Dashboard</title>
 
-		<!-- Tailwind CSS -->
-		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="./styles/output.css" />
 
 		<!-- Chart.js for Analytics -->
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-		<link rel="stylesheet" href="../styles/dashboard.css" />
+		<link rel="stylesheet" href="./styles/dashboard.css" />
 	</head>
 	<body class="bg-gray-100 font-sans">
 		<!-- Login Screen -->
@@ -181,7 +180,7 @@
 		<script>
 			document.addEventListener("DOMContentLoaded", () => {
 				// --- CONFIG ---
-				const API_URL = "http://localhost:3000/api"; // Your backend URL
+				const API_URL = "https://amy-s-blog-backend.onrender.com/api"; //  backend URL
 
 				// --- DOM Elements ---
 				const loginScreen = document.getElementById("login-screen");

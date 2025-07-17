@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 /* Custom styles to complement Tailwind and achieve the specific look */
 :root {
 	--color-text-header: rgba(51, 51, 51, 1);
@@ -95,6 +93,10 @@ h3,
 /* Background Gradient */
 .gradient-bg {
 	background: linear-gradient(to left, #4f99b9, #6f7e93);
+}
+
+.bg-hero-img {
+	background-image: url("../../../public/static/images/hero_bg.png");
 }
 
 /* --- Animation Styles --- */

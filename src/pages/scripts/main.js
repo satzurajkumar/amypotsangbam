@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			};
 
 			// IMPORTANT: Replace with your actual backend URL
-			const backendUrl = "http://192.168.29.118:3000/api/track";
+			const backendUrl = "https://amy-s-blog-backend.onrender.com/api/track";
 
 			// Send the data to the backend
 			await fetch(backendUrl, {
