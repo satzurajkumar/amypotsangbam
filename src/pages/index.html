@@ -150,7 +150,9 @@
 		</nav>
 
 		<!-- Header/Hero Section -->
-		<header class="h-lvh bg-hero-img md:bg-no-repeat md:bg-cover md:bg-center">
+		<header
+			class="h-lvh bg-hero-img max-w-100vw sm:max-w-100vw md:bg-no-repeat md:bg-cover md:bg-center"
+		>
 			<!-- This div  acts as a flex container to center its content both horizontally and vertically -->
 			<div
 				class="min-h-lvh flex flex-col items-center justify-center px-10 text-center gradient-bg/20 backdrop-blur-md"
@@ -243,11 +245,15 @@
 			<section class="py-16 md:py-24 shape-container">
 				<div class="container mx-auto px-6">
 					<div class="grid md:grid-cols-2 gap-12 items-center">
-						<div class="text-center md:text-left animate-on-scroll">
+						<div
+							class="text-center md:text-left animate-on-scroll break-words text-wrap"
+						>
 							<p class="text-secondary font-semibold tracking-wider">
-								I'M AMY,
+								Hi.. AMY here,
 							</p>
-							<h2 class="text-3xl md:text-5xl font-serif text-dark mt-2">
+							<h2
+								class="text-2xl sm:text-3xl md:text-5xl font-serif text-dark mt-2 break-words"
+							>
 								I'm a Nurse currently working on my dream project, now I'm my
 								own boss.
 							</h2>
@@ -269,9 +275,9 @@
 						</div>
 						<div class="flex justify-center animate-on-scroll">
 							<img
-								src="../../public/static/images/ams.jpg"
+								src="./static/images/ams.jpg"
 								alt="Amy Potsangbam"
-								class="rounded-lg shadow-xl w-[500px] h-[600px] object-cover object-center"
+								class="rounded-lg shadow-xl w-full max-w-[400px] sm:max-w-[500px] h-auto object-cover object-center"
 							/>
 						</div>
 					</div>
@@ -307,7 +313,7 @@
 				>
 					<div class="relative">
 						<img
-							src="../../public/static/images/career growth ilus.avif"
+							src="./static/images/career growth ilus.avif"
 							alt="Hand holding a phone"
 							class="mx-auto rounded-lg shadow-lg w-[300px] h-[450px] object-cover object-center"
 						/>
@@ -344,7 +350,7 @@
 					<p class="text-gray-600">Download my FREE resource:</p>
 					<div class="max-w-sm mx-auto mt-8">
 						<img
-							src="../../public/static/images/guide_cover.png"
+							src="./static/images/guide_cover.png"
 							alt="The Cheat Sheet guide cover"
 							class="rounded-lg shadow-2xl mx-auto w-[350] h-[450] object-center object-cover"
 						/>
@@ -405,7 +411,7 @@
 						</div>
 						<div class="flex justify-center">
 							<img
-								src="../../public/static/images/nurse_with_coat.png"
+								src="./static/images/nurse_with_coat.png"
 								alt="Podcast img"
 								class="rounded-2xl shadow-xl transform md:rotate-6 w-[300px] h-[600] object-center object-cover"
 							/>

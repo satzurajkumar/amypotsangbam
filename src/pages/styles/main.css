@@ -96,7 +96,7 @@ h3,
 }
 
 .bg-hero-img {
-	background-image: url("../../../public/static/images/hero_bg.png");
+	background-image: url("../static/images/hero_bg.png");
 }
 
 /* --- Animation Styles --- */
