@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload content from the specified directory
-          path: './src/pages' # Changed this line to point to your desired directory
+          path: './src' # Changed this line to point to your desired directory
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
