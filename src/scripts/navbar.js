@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="container mx-auto px-6">
                 <div class="flex justify-between items-center h-20">
                     <!-- Logo -->
-                    <a href="./index.html" class="text-2xl font-serif font-bold text-dark">Amy Potsangbam</a>
+                    <a href="../../index.html" class="text-2xl font-serif font-bold text-dark">Amy Potsangbam</a>
 
                     <!-- Desktop Menu -->
                     <div class="hidden md:flex space-x-8">
