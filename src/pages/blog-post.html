@@ -25,55 +25,11 @@
 
 		<link rel="stylesheet" href="./styles/output.css" />
 		<link rel="stylesheet" href="./styles/main.css" />
-		<style>
-			/* Styles for the blog content area */
-			.blog-content h2 {
-				font-size: 1.875rem; /* 3xl */
-				font-family: "Playfair Display", serif;
-				margin-top: 2rem;
-				margin-bottom: 1rem;
-			}
-			.blog-content p {
-				margin-bottom: 1.5rem;
-				line-height: 1.75;
-			}
-			.blog-content a {
-				color: var(--color-secondary);
-				text-decoration: underline;
-			}
-		</style>
+		<link rel="stylesheet" href="./styles/blogPost.css" />
 	</head>
 	<body class="bg-white">
 		<!-- Fixed Navbar -->
-		<nav id="navbar" class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-			<div class="container mx-auto px-6">
-				<div class="flex justify-between items-center h-20">
-					<a href="./ndex.html" class="text-2xl font-serif font-bold text-dark"
-						>Amy Potsangbam</a
-					>
-					<div class="hidden md:flex space-x-8">
-						<a href="./blogs.html" class="text-gray-600 hover:text-secondary"
-							>Blogs</a
-						>
-						<a
-							href="./resources.html"
-							class="text-gray-600 hover:text-secondary"
-							>Resources</a
-						>
-						<a href="./about.html" class="text-gray-600 hover:text-secondary"
-							>About me</a
-						>
-						<a href="./gallery.html" class="text-gray-600 hover:text-secondary"
-							>Gallery</a
-						>
-
-						<a href="./contact.html" class="text-gray-600 hover:text-secondary"
-							>Contact me</a
-						>
-					</div>
-				</div>
-			</div>
-		</nav>
+		<nav id="navbar"></nav>
 
 		<!-- Main Content -->
 		<main class="pt-32 pb-16">
@@ -116,6 +72,7 @@
 		<footer id="footer"></footer>
 		<!-- -------------------- -->
 		<script src="./scripts/footer.js"></script>
+		<script src="./scripts/navbar.js"></script>
 
 		<script>
 			document.addEventListener("DOMContentLoaded", () => {

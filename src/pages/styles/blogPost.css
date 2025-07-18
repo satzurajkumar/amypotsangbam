@@ -1,0 +1,15 @@
+/* Styles for the blog content area */
+.blog-content h2 {
+	font-size: 1.875rem; /* 3xl */
+	font-family: "Playfair Display", serif;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+}
+.blog-content p {
+	margin-bottom: 1.5rem;
+	line-height: 1.75;
+}
+.blog-content a {
+	color: var(--color-secondary);
+	text-decoration: underline;
+}
