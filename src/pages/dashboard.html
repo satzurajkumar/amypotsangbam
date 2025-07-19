@@ -5,13 +5,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Admin Dashboard</title>
 
+		<!-- Tailwind CSS -->
 		<script src="https://cdn.tailwindcss.com"></script>
+		<!-- Chart.js for Analytics -->
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+		<!-- Quill Rich Text Editor CSS -->
 		<link
 			href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
 			rel="stylesheet"
 		/>
+		<!-- Quill Rich Text Editor JS -->
 		<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
 		<style>
@@ -48,21 +52,22 @@
 			.ql-toolbar.ql-snow {
 				border-top-left-radius: 0.375rem;
 				border-top-right-radius: 0.375rem;
-				border-color: #d1d5db; /* gray-300 */
+				border-color: #d1d5db;
 			}
 			.ql-container.ql-snow {
 				border-bottom-left-radius: 0.375rem;
 				border-bottom-right-radius: 0.375rem;
-				border-color: #d1d5db; /* gray-300 */
+				border-color: #d1d5db;
 			}
 
-			/* Added for responsive sidebar */
-			@media (max-width: 768px) {
+			/* Responsive Sidebar Styles */
+			@media (max-width: 1023px) {
+				/* Tailwind's lg breakpoint */
 				#sidebar {
 					transform: translateX(-100%);
-					position: absolute;
+					position: fixed;
 					height: 100%;
-					z-index: 50; /* Ensure it's above other content */
+					z-index: 50;
 					transition: transform 0.3s ease-in-out;
 				}
 				#sidebar.open {
@@ -70,7 +75,7 @@
 				}
 				#overlay {
 					display: none;
-					position: absolute;
+					position: fixed;
 					top: 0;
 					left: 0;
 					right: 0;
@@ -85,6 +90,7 @@
 		</style>
 	</head>
 	<body class="bg-gray-100 font-sans">
+		<!-- Login Screen -->
 		<div id="login-screen" class="flex items-center justify-center h-screen">
 			<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
 				<h2 class="text-2xl font-bold mb-6 text-center">Admin Login</h2>
@@ -123,13 +129,16 @@
 			</div>
 		</div>
 
+		<!-- Main Dashboard UI (Initially Hidden) -->
 		<div id="dashboard-ui" class="hidden h-screen bg-gray-200">
-			<div class="flex h-full relative lg:static">
+			<div class="flex h-full relative">
+				<!-- Overlay for mobile sidebar -->
 				<div id="overlay" class="hidden lg:hidden"></div>
 
+				<!-- Sidebar -->
 				<div
 					id="sidebar"
-					class="w-64 bg-gray-800 text-white p-5 flex-shrink-0 flex flex-col z-50 fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 ease-in-out"
+					class="w-64 bg-gray-800 text-white p-5 flex-shrink-0 flex flex-col"
 				>
 					<div class="text-2xl font-bold mb-10">Admin Panel</div>
 					<nav>
@@ -157,6 +166,7 @@
 					</button>
 				</div>
 
+				<!-- Main Content -->
 				<div class="flex-1 flex flex-col overflow-hidden">
 					<header class="bg-white shadow-sm p-4 flex items-center">
 						<button
@@ -168,7 +178,6 @@
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
-								xmlns="http://www.w3.org/2000/svg"
 							>
 								<path
 									stroke-linecap="round"
@@ -185,8 +194,9 @@
 					<main
 						class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6"
 					>
+						<!-- Dashboard Content -->
 						<div id="dashboard-content" class="content-panel">
-							<div class="bg-white p-6 rounded-lg shadow-md col-span-full h-80">
+							<div class="bg-white p-6 rounded-lg shadow-md">
 								<h3 class="text-xl font-semibold mb-4">
 									Site Visitors (Last 7 Days)
 								</h3>
@@ -194,8 +204,9 @@
 							</div>
 						</div>
 
+						<!-- Blogs Content -->
 						<div id="blogs-content" class="content-panel hidden">
-							<div class="bg-white p-6 rounded-lg shadow-md mb-6">
+							<div class="bg-white p-6 rounded-lg shadow-md">
 								<h3 id="blog-form-title" class="text-xl font-semibold mb-4">
 									Write a New Blog Post
 								</h3>
@@ -204,12 +215,11 @@
 									<div class="mb-4">
 										<label for="blog-title" class="block mb-1 font-medium"
 											>Title</label
-										>
-										<input
+										><input
 											type="text"
 											id="blog-title"
 											placeholder="Post Title"
-											class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+											class="w-full p-3 border border-gray-300 rounded-md"
 											required
 										/>
 									</div>
@@ -217,20 +227,18 @@
 										<label class="block mb-1 font-medium">Content</label>
 										<div id="editor-container"></div>
 									</div>
-									<div
-										class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-10"
-									>
+									<div class="flex items-center gap-4 mt-10">
 										<button
 											type="submit"
 											id="blog-submit-button"
-											class="w-full sm:w-auto bg-blue-500 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-600 transition-colors"
+											class="bg-blue-500 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-600"
 										>
 											Publish Post
 										</button>
 										<button
 											type="button"
 											id="blog-cancel-button"
-											class="hidden w-full sm:w-auto bg-gray-500 text-white font-bold py-2 px-6 rounded-md hover:bg-gray-600 transition-colors"
+											class="hidden bg-gray-500 text-white font-bold py-2 px-6 rounded-md hover:bg-gray-600"
 										>
 											Cancel
 										</button>
@@ -242,7 +250,7 @@
 									Manage Existing Posts
 								</h3>
 								<div class="overflow-x-auto">
-									<table class="w-full text-left table-auto">
+									<table class="w-full text-left">
 										<thead>
 											<tr class="border-b">
 												<th class="p-2">Title</th>
@@ -256,27 +264,33 @@
 							</div>
 						</div>
 
+						<!-- Media control Content -->
 						<div id="portfolio-content" class="content-panel hidden">
 							<div class="bg-white p-6 rounded-lg shadow-md">
 								<h3 class="text-xl font-semibold mb-4">Upload New Media</h3>
-								<form
-									id="imageUploadForm"
-									class="flex flex-col sm:flex-row sm:items-center gap-4"
-								>
+								<form id="imageUploadForm">
 									<input
 										type="file"
 										name="image"
 										accept="image/*"
 										required
-										class="mb-4 sm:mb-0 w-full sm:w-auto border border-gray-300 rounded-md p-2"
+										class="mb-4"
 									/>
 									<button
 										type="submit"
-										class="bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 w-full sm:w-auto"
+										id="upload-button"
+										class="bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 disabled:bg-green-300"
 									>
 										Upload
 									</button>
 								</form>
+							</div>
+							<div class="bg-white p-6 rounded-lg shadow-md mt-6">
+								<h3 class="text-xl font-semibold mb-4">Manage Media</h3>
+								<div
+									id="media-grid"
+									class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+								></div>
 							</div>
 						</div>
 					</main>
@@ -284,298 +298,6 @@
 			</div>
 		</div>
 
-		<script>
-			document.addEventListener("DOMContentLoaded", () => {
-				const API_URL = "https://amy-s-blog-backend.onrender.com/api";
-
-				// --- DOM Elements ---
-				const loginScreen = document.getElementById("login-screen");
-				const dashboardUI = document.getElementById("dashboard-ui");
-				const loginForm = document.getElementById("login-form");
-				const logoutButton = document.getElementById("logout-button");
-				let visitorsChart;
-				let quill;
-
-				// --- NEW: Mobile Menu Elements ---
-				const mobileMenuButton = document.getElementById("mobile-menu-button");
-				const sidebar = document.getElementById("sidebar");
-				const overlay = document.getElementById("overlay");
-
-				// --- API Helper with all methods ---
-				const api = {
-					async request(method, endpoint, body = null) {
-						const headers = { Authorization: `Bearer ${auth.token}` };
-						if (body) {
-							headers["Content-Type"] = "application/json";
-						}
-						const config = {
-							method,
-							headers,
-							body: body ? JSON.stringify(body) : null,
-						};
-						const response = await fetch(`${API_URL}${endpoint}`, config);
-						return {
-							ok: response.ok,
-							status: response.status,
-							data: await response.json(),
-						};
-					},
-					get(endpoint) {
-						return this.request("GET", endpoint);
-					},
-					post(endpoint, body) {
-						return this.request("POST", endpoint, body);
-					},
-					put(endpoint, body) {
-						return this.request("PUT", endpoint, body);
-					},
-					del(endpoint) {
-						return this.request("DELETE", endpoint);
-					},
-				};
-
-				// --- Authentication ---
-				const auth = {
-					token: localStorage.getItem("token"),
-					async login(username, password) {
-						const response = await fetch(`${API_URL}/auth/login`, {
-							method: "POST",
-							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({ username, password }),
-						});
-						const data = await response.json();
-						if (response.ok && data.token) {
-							this.token = data.token;
-							localStorage.setItem("token", data.token);
-							this.showDashboard();
-						} else {
-							document.getElementById("login-error").textContent =
-								data.msg || `Error: ${response.status}`;
-						}
-					},
-					logout() {
-						this.token = null;
-						localStorage.removeItem("token");
-						loginScreen.style.display = "flex";
-						dashboardUI.style.display = "none";
-						// Close sidebar if open on logout
-						sidebar.classList.remove("open");
-						overlay.classList.remove("active");
-					},
-					showDashboard() {
-						loginScreen.style.display = "none";
-						dashboardUI.style.display = "block";
-						initDashboard();
-					},
-					check() {
-						if (this.token) this.showDashboard();
-					},
-				};
-
-				loginForm.addEventListener("submit", (e) => {
-					e.preventDefault();
-					auth.login(
-						document.getElementById("username").value,
-						document.getElementById("password").value
-					);
-				});
-				logoutButton.addEventListener("click", () => auth.logout());
-
-				// --- NEW: Mobile Menu Toggle Logic ---
-				mobileMenuButton.addEventListener("click", () => {
-					sidebar.classList.toggle("open");
-					overlay.classList.toggle("active");
-				});
-
-				// Close sidebar when clicking outside on overlay
-				overlay.addEventListener("click", () => {
-					sidebar.classList.remove("open");
-					overlay.classList.remove("active");
-				});
-
-				// Close sidebar when a navigation link is clicked on mobile
-				document.querySelectorAll(".sidebar-link").forEach((link) => {
-					link.addEventListener("click", () => {
-						if (window.innerWidth <= 768) {
-							// Check if on mobile
-							sidebar.classList.remove("open");
-							overlay.classList.remove("active");
-						}
-					});
-				});
-
-				// --- Dashboard Initialization ---
-				const initDashboard = () => {
-					initializeQuillEditor();
-					loadAnalytics();
-					loadBlogPosts();
-					setupNavigation();
-					setupBlogForm();
-				};
-
-				// --- Quill Editor Initialization ---
-				const initializeQuillEditor = () => {
-					quill = new Quill("#editor-container", {
-						theme: "snow",
-						modules: {
-							toolbar: [
-								[{ header: [1, 2, 3, false] }],
-								["bold", "italic", "underline"],
-								[{ list: "ordered" }, { list: "bullet" }],
-								["link"],
-								["clean"],
-							],
-						},
-						placeholder: "Start writing your amazing blog post here...",
-					});
-				};
-
-				// --- Analytics ---
-				const loadAnalytics = async () => {
-					const response = await api.get("/analytics/visitors");
-					if (!response.ok) return;
-					const data = response.data;
-					if (visitorsChart) visitorsChart.destroy();
-					const ctx = document.getElementById("visitorsChart").getContext("2d");
-					visitorsChart = new Chart(ctx, {
-						type: "line",
-						data: {
-							labels: data.labels,
-							datasets: [
-								{
-									label: "Unique Visitors",
-									data: data.data,
-									borderColor: "#3b82f6",
-									tension: 0.1,
-								},
-							],
-						},
-						options: {
-							responsive: true, // Make chart responsive
-							maintainAspectRatio: false, // Allow chart to adjust size
-							scales: {
-								y: {
-									beginAtZero: true,
-								},
-							},
-						},
-					});
-				};
-
-				// --- Blog Management ---
-				const blogList = document.getElementById("blog-list");
-				const blogForm = document.getElementById("blog-form");
-				const blogFormTitle = document.getElementById("blog-form-title");
-				const blogSubmitButton = document.getElementById("blog-submit-button");
-				const blogCancelButton = document.getElementById("blog-cancel-button");
-				const blogIdInput = document.getElementById("blog-id");
-				const blogTitleInput = document.getElementById("blog-title");
-
-				const loadBlogPosts = async () => {
-					const response = await api.get("/blogs");
-					if (!response.ok) return;
-					const posts = response.data;
-					blogList.innerHTML = "";
-					posts.forEach((post) => {
-						const row = document.createElement("tr");
-						row.innerHTML = `
-                        <td class="p-2 border-b-2 text-wrap break-words max-w-[150px] sm:max-w-none">${
-													post.title
-												}</td>
-                        <td class="p-2 border-b-2 hidden sm:table-cell">${new Date(
-													post.created_at
-												).toLocaleDateString()}</td>
-                        <td class="p-2 border-b-2 flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
-                            <button data-id="${
-															post.id
-														}" class="edit-post-btn text-blue-500 hover:text-blue-700 py-1 px-2 rounded bg-blue-100">Edit</button>
-                            <button data-id="${
-															post.id
-														}" class="delete-post-btn text-red-500 hover:text-red-700 py-1 px-2 rounded bg-red-100">Delete</button>
-                        </td>
-                    `;
-						blogList.appendChild(row);
-					});
-				};
-
-				const setupBlogForm = () => {
-					blogForm.addEventListener("submit", async (e) => {
-						e.preventDefault();
-						const id = blogIdInput.value;
-						const title = blogTitleInput.value;
-						const content = quill.root.innerHTML; // Get content from Quill editor
-
-						const isUpdating = !!id;
-						const response = isUpdating
-							? await api.put(`/blogs/${id}`, { title, content })
-							: await api.post("/blogs", { title, content });
-
-						if (response.ok) {
-							resetBlogForm();
-							loadBlogPosts();
-						} else {
-							alert(`Error: ${response.data.msg || "Failed to save post."}`);
-						}
-					});
-
-					blogCancelButton.addEventListener("click", resetBlogForm);
-				};
-
-				const resetBlogForm = () => {
-					blogForm.reset();
-					quill.root.innerHTML = ""; // Clear Quill editor
-					blogIdInput.value = "";
-					blogFormTitle.textContent = "Write a New Blog Post";
-					blogSubmitButton.textContent = "Publish Post";
-					blogCancelButton.classList.add("hidden");
-				};
-
-				blogList.addEventListener("click", async (e) => {
-					const target = e.target;
-					const id = target.dataset.id;
-
-					if (target.classList.contains("delete-post-btn")) {
-						if (confirm("Are you sure you want to delete this post?")) {
-							await api.del(`/blogs/${id}`);
-							loadBlogPosts();
-						}
-					} else if (target.classList.contains("edit-post-btn")) {
-						const response = await api.get(`/blogs/${id}`);
-						if (response.ok) {
-							const post = response.data;
-							blogIdInput.value = post.id;
-							blogTitleInput.value = post.title;
-							quill.root.innerHTML = post.content; // Load content into Quill
-							blogFormTitle.textContent = "Edit Blog Post";
-							blogSubmitButton.textContent = "Update Post";
-							blogCancelButton.classList.remove("hidden");
-							blogForm.scrollIntoView({ behavior: "smooth" });
-						}
-					}
-				});
-
-				// --- Navigation ---
-				const setupNavigation = () => {
-					const links = document.querySelectorAll(".sidebar-link");
-					const panels = document.querySelectorAll(".content-panel");
-					const pageTitle = document.getElementById("page-title");
-					links.forEach((link) => {
-						link.addEventListener("click", (e) => {
-							e.preventDefault();
-							const targetId =
-								link.getAttribute("href").substring(1) + "-content";
-							links.forEach((l) => l.classList.remove("active"));
-							link.classList.add("active");
-							panels.forEach((p) => p.classList.add("hidden"));
-							document.getElementById(targetId).classList.remove("hidden");
-							pageTitle.textContent = link.textContent.trim();
-						});
-					});
-				};
-
-				// --- Initial Check ---
-				auth.check();
-			});
-		</script>
+		<script src="./scripts/dashboard.js"></script>
 	</body>
 </html>
