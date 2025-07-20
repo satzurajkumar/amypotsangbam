@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const API_URL = "https://amy-s-blog-backend.onrender.com/api";
-	// const API_URL = "http://localhost:3000/api";
 
 	// --- DOM Elements ---
 	const loginScreen = document.getElementById("login-screen");
@@ -135,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		setupNavigation();
 		setupBlogForm();
 		setupMediaForm();
+		setupImageUploadArea();
 	};
 
 	const initializeQuillEditor = () => {
@@ -290,25 +290,124 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	};
 
-	const setupMediaForm = () => {
-		imageUploadForm.addEventListener("submit", async (e) => {
-			e.preventDefault();
-			const uploadButton = document.getElementById("upload-button");
-			const formData = new FormData(imageUploadForm);
-			uploadButton.disabled = true;
-			uploadButton.textContent = "Uploading...";
-			const response = await api.postForm("/gallery/upload", formData);
-			if (response.ok) {
-				imageUploadForm.reset();
-				loadMediaGallery();
+	// NEW/UPDATED ELEMENTS FOR IMAGE PREVIEW & D&D
+	const imageFileInput = document.getElementById("imageFileInput");
+	const imagePreviewContainer = document.getElementById(
+		"imagePreviewContainer"
+	);
+	const imagePreview = document.getElementById("imagePreview");
+	const imagePreviewPlaceholder = document.getElementById(
+		"imagePreviewPlaceholder"
+	);
+	const imageFileName = document.getElementById("imageFileName");
+	const uploadButton = document.getElementById("upload-button"); // Get reference to the actual button
+
+	const updateImagePreview = (file) => {
+		if (file) {
+			if (file.type.startsWith("image/")) {
+				const reader = new FileReader();
+
+				reader.onload = (e) => {
+					imagePreview.src = e.target.result;
+					imagePreview.classList.remove("hidden");
+					imagePreviewPlaceholder.classList.add("hidden");
+					imageFileName.textContent = file.name;
+					imageFileName.classList.remove("hidden");
+					uploadButton.classList.remove("hidden"); // Show the upload button
+				};
+
+				reader.readAsDataURL(file);
 			} else {
-				alert(`Upload failed: ${response.data.msg || "An error occurred"}`);
+				// Not an image, clear preview and show placeholder
+				imagePreview.src = "#";
+				imagePreview.classList.add("hidden");
+				imagePreviewPlaceholder.classList.remove("hidden");
+				imageFileName.classList.add("hidden");
+				imageFileName.textContent = "";
+				uploadButton.classList.add("hidden"); // Hide button if not an image
+				alert("Please select an image file (e.g., .jpg, .png, .gif).");
+				return false; // Indicate failure
 			}
-			uploadButton.disabled = false;
-			uploadButton.textContent = "Upload";
+		} else {
+			// No file (e.g., after successful upload or clear)
+			imagePreview.src = "#";
+			imagePreview.classList.add("hidden");
+			imagePreviewPlaceholder.classList.remove("hidden");
+			imageFileName.classList.add("hidden");
+			imageFileName.textContent = "";
+			uploadButton.classList.add("hidden"); // Hide the upload button
+		}
+		return true; // Indicate success (file was processed)
+	};
+
+	// Function to handle image selection and drag/drop
+	const setupImageUploadArea = () => {
+		// 1. Handle click on the preview container to open file input
+		imagePreviewContainer.addEventListener("click", () => {
+			imageFileInput.click(); // Programmatically click the hidden file input
+		});
+
+		// 2. Handle file input change (for both click selection and drag/drop)
+		imageFileInput.addEventListener("change", (event) => {
+			const file = event.target.files[0];
+			updateImagePreview(file); // Simply update preview and button visibility
+			// NO AUTO-SUBMIT HERE. Submission will happen via the visible uploadButton click.
+		});
+
+		// 3. Handle Drag and Drop events
+		imagePreviewContainer.addEventListener("dragover", (e) => {
+			e.preventDefault(); // Prevent default to allow drop
+			imagePreviewContainer.classList.add("border-blue-600", "bg-blue-100"); // Visual feedback
+		});
+
+		imagePreviewContainer.addEventListener("dragleave", (e) => {
+			e.preventDefault();
+			imagePreviewContainer.classList.remove("border-blue-600", "bg-blue-100"); // Remove visual feedback
+		});
+
+		imagePreviewContainer.addEventListener("drop", (e) => {
+			e.preventDefault();
+			imagePreviewContainer.classList.remove("border-blue-600", "bg-blue-100"); // Remove visual feedback
+
+			const files = e.dataTransfer.files; // Get dropped files
+			if (files.length > 0) {
+				// Assign the dropped file to the hidden file input
+				imageFileInput.files = files;
+				// Manually trigger the 'change' event on the input
+				// so our existing change listener handles the preview and button visibility
+				const changeEvent = new Event("change", { bubbles: true });
+				imageFileInput.dispatchEvent(changeEvent);
+			}
 		});
 	};
 
+	const setupMediaForm = () => {
+		imageUploadForm.addEventListener("submit", async (e) => {
+			e.preventDefault(); // Prevent default browser submission
+
+			const file = imageFileInput.files[0];
+			if (!file) {
+				alert("Please select an image to upload.");
+				return;
+			}
+
+			uploadButton.disabled = true;
+			uploadButton.textContent = "Uploading...";
+
+			const formData = new FormData(imageUploadForm);
+
+			const response = await api.postForm("/gallery/upload", formData);
+			if (response.ok) {
+				loadMediaGallery();
+				updateImagePreview(null); // Clear the preview and hide button
+				imageFileInput.value = ""; // Clear the actual file input selection for next upload
+			} else {
+				alert(`Upload failed: ${response.data.msg || "An error occurred"}`);
+			}
+			uploadButton.textContent = "Upload";
+			uploadButton.disabled = false;
+		});
+	};
 	mediaGrid.addEventListener("click", async (e) => {
 		if (e.target.classList.contains("delete-media-btn")) {
 			const publicId = e.target.dataset.publicId;

@@ -6,7 +6,11 @@
 		<title>Admin Dashboard</title>
 
 		<!-- Tailwind CSS -->
-		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="./styles/output.css" />
+
+		<!-- Custom CSS for dashboard -->
+		<link rel="stylesheet" href="./styles/dashboard.css" />
+
 		<!-- Chart.js for Analytics -->
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -17,77 +21,6 @@
 		/>
 		<!-- Quill Rich Text Editor JS -->
 		<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-		<style>
-			/* Custom styles for the dashboard */
-			::-webkit-scrollbar {
-				width: 8px;
-			}
-			::-webkit-scrollbar-track {
-				background: #f1f1f1;
-			}
-			::-webkit-scrollbar-thumb {
-				background: #888;
-				border-radius: 4px;
-			}
-			::-webkit-scrollbar-thumb:hover {
-				background: #555;
-			}
-			.sidebar-link.active {
-				background-color: #3b82f6;
-				color: white;
-			}
-			.sidebar-link {
-				transition: background-color 0.2s ease-in-out;
-			}
-			.sidebar-link:hover {
-				background-color: #374151;
-			} /* gray-700 */
-
-			/* Quill Editor Styling */
-			#editor-container {
-				height: 250px;
-				background-color: white;
-			}
-			.ql-toolbar.ql-snow {
-				border-top-left-radius: 0.375rem;
-				border-top-right-radius: 0.375rem;
-				border-color: #d1d5db;
-			}
-			.ql-container.ql-snow {
-				border-bottom-left-radius: 0.375rem;
-				border-bottom-right-radius: 0.375rem;
-				border-color: #d1d5db;
-			}
-
-			/* Responsive Sidebar Styles */
-			@media (max-width: 1023px) {
-				/* Tailwind's lg breakpoint */
-				#sidebar {
-					transform: translateX(-100%);
-					position: fixed;
-					height: 100%;
-					z-index: 50;
-					transition: transform 0.3s ease-in-out;
-				}
-				#sidebar.open {
-					transform: translateX(0);
-				}
-				#overlay {
-					display: none;
-					position: fixed;
-					top: 0;
-					left: 0;
-					right: 0;
-					bottom: 0;
-					background-color: rgba(0, 0, 0, 0.5);
-					z-index: 40;
-				}
-				#overlay.active {
-					display: block;
-				}
-			}
-		</style>
 	</head>
 	<body class="bg-gray-100 font-sans">
 		<!-- Login Screen -->
@@ -268,18 +201,44 @@
 						<div id="portfolio-content" class="content-panel hidden">
 							<div class="bg-white p-6 rounded-lg shadow-md">
 								<h3 class="text-xl font-semibold mb-4">Upload New Media</h3>
-								<form id="imageUploadForm">
+								<form id="imageUploadForm" class="flex flex-col items-center">
 									<input
 										type="file"
+										id="imageFileInput"
 										name="image"
 										accept="image/*"
 										required
-										class="mb-4"
+										class="hidden"
 									/>
+
+									<div
+										id="imagePreviewContainer"
+										class="mb-4 mt-2 p-4 w-full md:w-3/4 lg:w-1/2 h-64 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 flex flex-col justify-center items-center text-center cursor-pointer transition-colors duration-200 hover:border-blue-400 hover:bg-blue-50 overflow-hidden"
+									>
+										<img
+											id="imagePreview"
+											src="#"
+											alt="Image Preview"
+											class="max-w-full max-h-full object-contain hidden"
+											style="height: auto; max-width: 100%; display: block"
+										/>
+
+										<p
+											id="imagePreviewPlaceholder"
+											class="text-gray-500 text-sm"
+										>
+											Drag & drop an image here, or click to select a file.
+										</p>
+										<p
+											id="imageFileName"
+											class="text-xs text-gray-700 hidden mt-1"
+										></p>
+									</div>
+
 									<button
 										type="submit"
 										id="upload-button"
-										class="bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 disabled:bg-green-300"
+										class="hidden bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 disabled:bg-green-300"
 									>
 										Upload
 									</button>
