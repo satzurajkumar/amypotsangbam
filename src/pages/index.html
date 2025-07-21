@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Amy Potsangbam - my take on nursing as a career</title>
+		<link rel="icon" href="./static/favicon/favicon.ico" type="image/x-icon" />
 
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -155,7 +156,7 @@
 		>
 			<!-- This div  acts as a flex container to center its content both horizontally and vertically -->
 			<div
-				class="min-h-lvh flex flex-col items-center justify-center px-10 text-center gradient-bg/20 backdrop-blur-md"
+				class="min-h-lvh flex flex-col items-center justify-center px-10 text-center bg-indigo-200/20 backdrop-blur-md"
 			>
 				<h1
 					class="text-4xl pt-28 sm:text-6xl font-serif text-white leading-tight"
@@ -175,13 +176,15 @@
 				</p>
 
 				<div
-					class="max-w-4xl mx-auto text-left rounded-xl p-8 mt-[1rem] xl:mt[4rem] overflow-hidden bg-white/50 backdrop-blur-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out animate-on-scroll"
+					class="max-w-4xl mx-auto mb-4 text-left rounded-xl p-8 mt-[1rem] xl:mt[4rem] overflow-hidden bg-white/50 backdrop-blur-2xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out animate-on-scroll"
 				>
-					<span class="text-emerald-600 font-bold">FREE GUIDE!</span>
+					<span class="text-emerald-600 font-bold"
+						>FREE GUIDES, Tip & Tricks!</span
+					>
 					<p
 						class="text-xl md:text-2xl font-bold text-grey-200 mb-6 leading-tight"
 					>
-						RECOMMENDED FIRST 10 STEPS FOR A BEGINNER IN NURSING & HEALTHCARE
+						SUBSCRIBE HERE FOR FREE GUIDES, WEEKLY TIPS & TRICKS, AND UPDATES
 					</p>
 					<!-- This div acts as a container for the entire subscription form, centering its content. -->
 					<div
@@ -208,7 +211,7 @@
 								<!-- Ensured full width on mobile, and auto width on larger screens. -->
 								<button
 									type="submit"
-									class="px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg shadow-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition duration-300 ease-in-out w-full sm:w-auto"
+									class="px-6 py-3 bg-teal-600 text-white font-semibold whitespace-nowrap rounded-lg shadow-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition duration-300 ease-in-out w-full sm:w-auto"
 								>
 									Subscribe
 								</button>
@@ -219,14 +222,14 @@
 						<!-- Adjusted text size for better readability on smaller screens. -->
 						<p
 							id="disclaimerText"
-							class="mt-2 text-center text-gray-600 text-xs leading-relaxed max-w-xs sm:max-w-md hidden"
+							class="mt-2 text-center text-gray-600 text-xs leading-relaxed max-w-xs sm:max-w-md"
 						>
 							AmyPotsangbam.com needs the contact information you provide to us
 							to contact you about our products and services. You may
 							unsubscribe from these communications at anytime. See our
 							<!-- Link to the privacy policy -->
 							<a
-								href="/privacy-policy"
+								href="./privacy.html"
 								class="text-teal-600 hover:text-teal-800 underline font-medium"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -244,7 +247,7 @@
 			<!-- About Section -->
 			<section class="py-16 md:py-24 shape-container">
 				<div class="container mx-auto px-6">
-					<div class="grid md:grid-cols-2 gap-12 items-center">
+					<div class="grid md:grid-cols-2 items-center">
 						<div
 							class="text-center md:text-left animate-on-scroll break-words text-wrap"
 						>
@@ -269,7 +272,7 @@
 							<a
 								href="#"
 								class="inline-block btn-secondary font-bold py-3 px-8 rounded-md mt-8"
-								>JOIN US</a
+								>DOWNLOAD MY FREE GUIDE</a
 							>
 						</div>
 						<div class="flex justify-center animate-on-scroll">
@@ -419,31 +422,6 @@
 				</div>
 			</section>
 		</main>
-		<script>
-			// This script handles the visibility of the disclaimer text based on email input focus.
-			document.addEventListener("DOMContentLoaded", () => {
-				// Get references to the email input and the disclaimer paragraph by their IDs.
-				const emailInput = document.getElementById("emailInput");
-				const disclaimerText = document.getElementById("disclaimerText");
-
-				// Ensure both elements exist before adding event listeners.
-				if (emailInput && disclaimerText) {
-					// Add an event listener for when the email input gains focus.
-					emailInput.addEventListener("focus", () => {
-						// When focused, remove the 'hidden' class and add 'block' to make it visible.
-						disclaimerText.classList.remove("hidden");
-						disclaimerText.classList.add("block");
-					});
-
-					// Add an event listener for when the email input loses focus.
-					emailInput.addEventListener("blur", () => {
-						// When blurred, remove 'block' and add 'hidden' to hide it again.
-						disclaimerText.classList.remove("block");
-						disclaimerText.classList.add("hidden");
-					});
-				}
-			});
-		</script>
 
 		<!-- Footer Section -->
 		<footer id="footer"></footer>
@@ -451,6 +429,6 @@
 		<script src="./scripts/footer.js"></script>
 		<script src="./scripts/main.js"></script>
 		<script src="./scripts/navbar.js"></script>
-		<script src="./scripts/heroSubsForm.js"></script>
+		<!-- <script src="./scripts/heroSubsForm.js"></script> -->
 	</body>
 </html>
