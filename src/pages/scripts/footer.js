@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
 						<h4 class="text-white font-bold tracking-wider mb-4">START HERE</h4>
 						<ul>
 							<li class="mb-2">
-								<a href="#" class="hover:text-white">Free Resources</a>
+								<a href="resources.html" class="hover:text-white">Free Resources</a>
 							</li>
 							<li class="mb-2">
-								<a href="#" class="hover:text-white">The Blog</a>
+								<a href="blogs.html" class="hover:text-white">Blogs</a>
 							</li>
 							<li class="mb-2">
 								<a href="#" class="hover:text-white">My Story</a>
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 								>
 							</li>
 							<li class="mb-2">
-								<a href="#" class="hover:text-white hover:opacity-100"
+								<a href="contact.html" class="hover:text-white hover:opacity-100"
 									>Contact</a
 								>
 							</li>
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 								>
 							</li>
 							<li class="mb-2">
-								<a href="#" class="hover:text-white hover:opacity-100"
+								<a href="tnc.html" class="hover:text-white hover:opacity-100"
 									>Terms & Conditions</a
 								>
 							</li>
