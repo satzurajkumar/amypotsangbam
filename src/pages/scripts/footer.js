@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 						<h4 class="text-white font-bold tracking-wider mb-4">LEGAL</h4>
 						<ul>
 							<li class="mb-2">
-								<a href="#" class="hover:text-white hover:opacity-100"
+								<a href="privacy.html" class="hover:text-white hover:opacity-100"
 									>Privacy Policy</a
 								>
 							</li>
