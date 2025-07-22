@@ -91,9 +91,9 @@ h3,
 }
 
 /* Background Gradient */
-/* .gradient-bg {
+.gradient-bg {
 	background: linear-gradient(to left, #5d697b, #183c4c);
-} */
+}
 
 .bg-hero-img {
 	background-image: url("../static/images/hero_bg.png");
