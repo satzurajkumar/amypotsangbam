@@ -1,3 +1,4 @@
 node_modules
 **/genAiTest.html
+src/pages/genAiTest.html
 ./node_modules
