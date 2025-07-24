@@ -79,6 +79,8 @@ function clearContent() {
 
 generateIdeasBtn.addEventListener("click", async () => {
 	const topic = topicInput.value.trim();
+	const token = localStorage.getItem("token");
+
 	if (!topic) {
 		setError("Please enter a topic first.");
 		return;
@@ -88,7 +90,10 @@ generateIdeasBtn.addEventListener("click", async () => {
 	try {
 		const response = await fetch(`${API_BASE_URL}/generate-ideas`, {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
 			body: JSON.stringify({ topic }),
 		});
 		const data = await response.json();
@@ -110,6 +115,7 @@ generateIdeasBtn.addEventListener("click", async () => {
 
 writePostBtn.addEventListener("click", async () => {
 	const topic = topicInput.value.trim();
+	const token = localStorage.getItem("token");
 	if (!topic) {
 		setError("Please select or enter a topic first.");
 		return;
@@ -119,7 +125,10 @@ writePostBtn.addEventListener("click", async () => {
 	try {
 		const response = await fetch(`${API_BASE_URL}/write-post`, {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
 			body: JSON.stringify({ topic }),
 		});
 		const data = await response.json();
