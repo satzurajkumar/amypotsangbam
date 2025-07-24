@@ -90,6 +90,11 @@
 							class="sidebar-link flex items-center py-3 px-4 rounded mt-2"
 							>Media</a
 						>
+						<a
+							href="#blogGenAI"
+							class="sidebar-link flex items-center py-3 px-4 rounded mt-2"
+							>Blogging with GenAI</a
+						>
 					</nav>
 					<button
 						id="logout-button"
@@ -252,11 +257,167 @@
 								></div>
 							</div>
 						</div>
+
+						<!-- Gen ai content -->
+						<div id="blogGenAI-content" class="content-panel hidden">
+							<div class="bg-white p-6 rounded-lg shadow-md">
+								<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+									<!-- Left Column: Controls -->
+									<aside class="lg:col-span-1 space-y-6">
+										<div
+											class="bg-slate-800/50 p-6 rounded-xl shadow-lg border border-slate-700"
+										>
+											<h2 class="text-xl font-bold text-sky-400 mb-4">
+												1. Start with a Topic
+											</h2>
+											<p class="text-slate-400 mb-4 text-sm">
+												Enter a keyword or a full topic to get started.
+											</p>
+											<input
+												type="text"
+												id="topicInput"
+												placeholder="e.g., 'The Future of AI'"
+												class="w-full bg-slate-700 border border-slate-600 rounded-md px-4 py-2 focus:ring-2 focus:ring-sky-500 focus:outline-none transition placeholder-slate-400 text-slate-200"
+											/>
+										</div>
+
+										<div
+											class="bg-slate-800/50 p-6 rounded-xl shadow-lg border border-slate-700"
+										>
+											<h2 class="text-xl font-bold text-sky-400 mb-4">
+												2. Generate Content
+											</h2>
+											<div class="space-y-4">
+												<!-- Action Button for Ideas -->
+												<button
+													id="generateIdeasBtn"
+													class="action-button w-full flex items-center justify-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 font-semibold rounded-lg shadow-md transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+												>
+													<svg
+														class="w-5 h-5"
+														fill="none"
+														stroke="currentColor"
+														viewBox="0 0 24 24"
+														xmlns="http://www.w3.org/2000/svg"
+													>
+														<path
+															stroke-linecap="round"
+															stroke-linejoin="round"
+															stroke-width="2"
+															d="M9.663 17h4.673M12 17v5m6.44-4.14L21 21M9.663 17a4.998 4.998 0 01-2.457-3.75 5 5 0 01.127-1.733M9.663 17h4.673M12 17v5m6.44-4.14L21 21M9.663 17a4.998 4.998 0 01-2.457-3.75 5 5 0 01.127-1.733M12 21.75a.75.75 0 00.75-.75h-.75V21h.75a.75.75 0 00-.75-.75v-.75a.75.75 0 00-.75.75h-.75V21h.75a.75.75 0 00-.75.75v.75zm0 0c.34-.047.653-.16.924-.315l-.76-.76a1.125 1.125 0 01-.164-.263l-.066-.145m-.385.195l-.184.184m.184-.184l-.184.184M3 21h18M12 3a.75.75 0 00-.75.75v-.75h-.75V3a.75.75 0 00-.75.75v.75h-.75V3a.75.75 0 00-.75.75v.75M3.75 3h.75v.75h-.75V3zm16.5 0h.75v.75h-.75V3z"
+														></path>
+													</svg>
+													<span>Generate Blog Ideas</span>
+												</button>
+												<!-- Action Button for Post -->
+												<button
+													id="writePostBtn"
+													class="action-button w-full flex items-center justify-center gap-2 px-6 py-3 bg-sky-600 hover:bg-sky-700 font-semibold rounded-lg shadow-md transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+												>
+													<svg
+														class="w-5 h-5"
+														fill="none"
+														stroke="currentColor"
+														viewBox="0 0 24 24"
+														xmlns="http://www.w3.org/2000/svg"
+													>
+														<path
+															stroke-linecap="round"
+															stroke-linejoin="round"
+															stroke-width="2"
+															d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+														></path>
+													</svg>
+													<span>Write Full Post</span>
+												</button>
+												<!-- Action Button for Image -->
+											</div>
+										</div>
+
+										<!-- Error Display -->
+										<div
+											id="errorDisplay"
+											class="hidden bg-red-500/20 border border-red-500 text-red-300 p-4 rounded-lg"
+											role="alert"
+										>
+											<p class="font-bold">Error</p>
+											<p id="errorMessage" class="text-sm"></p>
+										</div>
+
+										<!-- Idea List Display -->
+										<div
+											id="ideaListContainer"
+											class="hidden bg-slate-800/50 p-6 rounded-xl shadow-lg border border-slate-700"
+										>
+											<h3 class="text-lg font-semibold text-purple-400 mb-3">
+												Generated Ideas:
+											</h3>
+											<div id="ideaList" class="space-y-2">
+												<!-- Ideas will be dynamically inserted here -->
+											</div>
+										</div>
+									</aside>
+
+									<!-- Right Column: Output -->
+									<div
+										class="lg:col-span-2 bg-slate-800/50 p-4 sm:p-6 md:p-8 rounded-xl shadow-lg border border-slate-700 min-h-[500px] flex flex-col justify-center items-center"
+									>
+										<!-- Loader Display -->
+										<div id="loader" class="hidden text-center">
+											<div class="spinner mx-auto mb-4"></div>
+											<p
+												id="loaderText"
+												class="text-xl text-sky-400 font-semibold"
+											>
+												Loading...
+											</p>
+										</div>
+
+										<!-- Welcome/Placeholder Message -->
+										<div
+											id="welcomeMessage"
+											class="flex flex-col items-center justify-center h-full text-center text-slate-500 p-4"
+										>
+											<h2 class="text-2xl font-bold">
+												Your content will appear here
+											</h2>
+											<p class="mt-2 text-base">
+												Use the controls on the left to generate ideas, write a
+												post, or create an image.
+											</p>
+										</div>
+
+										<!-- Image Display -->
+										<div
+											id="imageDisplayContainer"
+											class="hidden w-full h-auto mb-6 rounded-lg overflow-hidden shadow-lg"
+										>
+											<img
+												id="generatedImage"
+												src=""
+												alt="Generated Blog Header"
+												class="w-full h-full object-cover rounded-lg"
+												onerror="this.onerror=null; this.src='https://placehold.co/800x450/334155/64748b?text=Image+Load+Error';"
+											/>
+										</div>
+
+										<!-- Blog Post Display -->
+										<div
+											id="blogDisplayContainer"
+											class="hidden w-full markdown-content text-slate-300"
+										>
+											<!-- Blog post content will be inserted here -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</main>
 				</div>
 			</div>
 		</div>
 
 		<script src="./scripts/dashboard.js"></script>
+		<script src="./scripts/genAI.js"></script>
 	</body>
 </html>
