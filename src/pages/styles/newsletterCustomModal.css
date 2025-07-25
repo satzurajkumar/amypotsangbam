@@ -1,7 +1,8 @@
 /* This class is used by JavaScript to hide/show elements */
-.hidden {
-	display: none !important; /* Use !important to override other display properties */
-}
+/* Use !important to override other display properties */
+/* .hidden {
+	display: none !important;
+} */
 
 /* --- Corrected Modal Styling --- */
 /* Targets the ID used in your HTML */
