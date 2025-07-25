@@ -9,7 +9,6 @@ Allow: /
 Disallow: /api/
 
 
-Disallow: /dashboard.html
 Disallow: /login.html
 #  sitemap location(s) for better indexing (optional)
 
