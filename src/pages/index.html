@@ -28,6 +28,7 @@
 		/>
 		<link rel="stylesheet" href="./styles/output.css" />
 		<link rel="stylesheet" href="./styles/main.css" />
+		<link rel="stylesheet" href="./styles/newsletterCustomModal.css" />
 	</head>
 	<body class="bg-white">
 		<!-- Fixed Navbar -->
@@ -167,6 +168,7 @@
 						>Sharing my experience</span
 					>
 				</h1>
+
 				<p
 					class="sm:text-xl text-lg text-white mt-4 font-semibold"
 					style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)"
@@ -422,6 +424,20 @@
 					</div>
 				</div>
 			</section>
+			<!-- Custom Modal Structure -->
+			<div id="customModalOverlay" class="modal-overlay hidden">
+				<div id="customModalContent" class="modal-content hidden">
+					<button id="modalCloseBtn" class="modal-close-button">&times;</button>
+					<h3 id="modalHeader" class="modal-header"></h3>
+					<p id="modalMessage" class="modal-message"></p>
+					<button
+						id="modalOkBtn"
+						class="px-6 py-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg transition"
+					>
+						OK
+					</button>
+				</div>
+			</div>
 		</main>
 
 		<!-- Footer Section -->
@@ -429,6 +445,7 @@
 		<!-- -------------------- -->
 		<script src="./scripts/footer.js"></script>
 		<script src="./scripts/main.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 		<script src="./scripts/navbar.js"></script>
 		<script src="./scripts/newsletterForm.js"></script>
 		<!-- <script src="./scripts/heroSubsForm.js"></script> -->
