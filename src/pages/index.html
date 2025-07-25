@@ -4,6 +4,28 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Amy Potsangbam - my take on nursing as a career</title>
+
+		<!-- !!! IMPORTANT: CONTENT SECURITY POLICY (CSP) META TAG !!! -->
+		<!-- This CSP is for frontend HTML served by static server. -->
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="
+        default-src 'self';
+        script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        img-src 'self' data: https://placehold.co;
+        connect-src 'self' https://amy-s-blog-backend.onrender.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+        frame-ancestors 'none';
+    "
+		/>
+		<!-- End CSP Meta Tag -->
+
+		<meta name="referrer" content="no-referrer-when-downgrade" />
+
 		<link rel="icon" href="./static/favicon/favicon.ico" type="image/x-icon" />
 
 		<!-- Google Fonts -->
@@ -273,7 +295,7 @@
 								it into a successful career.
 							</p>
 							<a
-								href="#"
+								href="./free-download.html"
 								class="inline-block btn-secondary font-bold py-3 px-8 rounded-md my-8"
 								>DOWNLOAD MY FREE GUIDE</a
 							>

@@ -28,13 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		customModalContent.classList.remove("hidden");
 		// Use a timeout to allow the browser to apply the 'display:flex'
 		// before adding the 'visible' class for the transition to work.
-		setTimeout(() => {
-			customModalOverlay.classList.add("visible");
-		}, 10);
+		// setTimeout(() => {
+		// 	customModalOverlay.classList.add("visible");
+		// }, 10);
 	}
 
 	function hideModal() {
-		customModalOverlay.classList.remove("visible");
+		// customModalOverlay.classList.remove("visible");
 		// Wait for the transition to finish before hiding the element
 		setTimeout(() => {
 			customModalContent.classList.add("hidden");

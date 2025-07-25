@@ -1,0 +1,17 @@
+# robots.txt for your AI Blog Content Generator and API
+
+# Allow all well-behaved crawlers to crawl the entire public frontend.
+User-agent: *
+Allow: /
+
+# Disallow crawling of API endpoints.
+# API endpoints are for programmatic access, not for search engine indexing.
+Disallow: /api/
+
+
+Disallow: /dashboard.html
+Disallow: /login.html
+#  sitemap location(s) for better indexing (optional)
+
+# Sitemap: https://www.amypotsangbam.com/sitemap.xml
+# Sitemap: https://amypotsangbam.onrender.com/sitemap.xml
