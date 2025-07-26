@@ -39,6 +39,16 @@
 	border-color: #d1d5db;
 }
 
+/* AI Assistant Loader */
+.spinner {
+	width: 24px;
+	height: 24px;
+	border: 3px solid rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+	border-top-color: #fff;
+	animation: spin 1s ease-in-out infinite;
+}
+
 /* Responsive Sidebar Styles */
 @media (max-width: 1023px) {
 	/* Tailwind's lg breakpoint */

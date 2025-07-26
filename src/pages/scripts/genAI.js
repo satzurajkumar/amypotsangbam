@@ -1,17 +1,12 @@
-const topicInput = document.getElementById("topicInput");
-const generateIdeasBtn = document.getElementById("generateIdeasBtn");
-const writePostBtn = document.getElementById("writePostBtn");
-// const generateImageBtn = document.getElementById("generateImageBtn");
-const errorDisplay = document.getElementById("errorDisplay");
-const errorMessage = document.getElementById("errorMessage");
-const ideaListContainer = document.getElementById("ideaListContainer");
-const ideaList = document.getElementById("ideaList");
-const loader = document.getElementById("loader");
+// --- AI Assistant Elements ---
+const aiTopicInput = document.getElementById("ai-topic");
+const generateTitlesBtn = document.getElementById("generate-titles-btn");
+const generatePostBtn = document.getElementById("generate-post-btn");
+const titleSuggestions = document.getElementById("title-suggestions");
+const aiLoader = document.getElementById("ai-loader");
+
 const loaderText = document.getElementById("loaderText");
 const welcomeMessage = document.getElementById("welcomeMessage");
-const imageDisplayContainer = document.getElementById("imageDisplayContainer");
-const generatedImageElem = document.getElementById("generatedImage");
-const blogDisplayContainer = document.getElementById("blogDisplayContainer");
 
 const API_BASE_URL = "https://amy-s-blog-backend.onrender.com/api/googleGenAI"; // Ensure this matches your Node.js server port
 
@@ -77,7 +72,7 @@ function clearContent() {
 
 // --- Event Handlers ---
 
-generateIdeasBtn.addEventListener("click", async () => {
+generateTitlesBtn.addEventListener("click", async () => {
 	const topic = topicInput.value.trim();
 	const token = localStorage.getItem("token");
 
@@ -86,7 +81,7 @@ generateIdeasBtn.addEventListener("click", async () => {
 		return;
 	}
 	clearContent(); // Clear previous content
-	setLoading("IDEAS", "Brainstorming ideas...");
+	// setLoading("IDEAS", "Brainstorming ideas...");
 	try {
 		const response = await fetch(`${API_BASE_URL}/generate-ideas`, {
 			method: "POST",
@@ -99,9 +94,25 @@ generateIdeasBtn.addEventListener("click", async () => {
 		const data = await response.json();
 
 		if (response.ok) {
-			displayIdeas(data.ideas || []);
-		} else {
-			setError(data.error || "Failed to generate blog ideas.");
+			try {
+				const parsed = JSON.parse(result);
+				titleSuggestions.innerHTML = "";
+				parsed.titles.forEach((title) => {
+					const button = document.createElement("button");
+					button.type = "button";
+					button.textContent = title;
+					button.className =
+						"w-full text-left p-2 bg-gray-200 hover:bg-blue-200 rounded-md transition text-sm";
+					button.onclick = () => {
+						document.getElementById("blog-title").value = title;
+						titleSuggestions.innerHTML = "";
+					};
+					titleSuggestions.appendChild(button);
+				});
+			} catch (e) {
+				console.error("Failed to parse title suggestions:", e);
+				alert("The AI returned an unexpected format for titles.");
+			}
 		}
 	} catch (e) {
 		setError(

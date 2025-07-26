@@ -450,4 +450,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// --- Initial Check ---
 	auth.check();
+	// auth.showDashboard();
 });
