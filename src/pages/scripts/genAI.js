@@ -109,6 +109,7 @@ generateTitlesBtn.addEventListener("click", async () => {
 						titleSuggestions.innerHTML = "";
 					};
 					titleSuggestions.appendChild(button);
+					aiTopicInput.value = "";
 				});
 			} catch (e) {
 				console.error("Failed to parse title suggestions:", e);
