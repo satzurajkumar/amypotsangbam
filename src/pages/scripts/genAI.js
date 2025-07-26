@@ -13,40 +13,38 @@ const API_BASE_URL = "https://amy-s-blog-backend.onrender.com/api/googleGenAI"; 
 let isLoading = false; // Flag to manage overall loading state
 
 // Utility function to set loading state
-function setLoading(activeTask, text = "Loading...") {
-	isLoading = true;
-	topicInput.disabled = true;
-	generateIdeasBtn.disabled = true;
-	writePostBtn.disabled = true;
+// function setLoading(activeTask, text = "Loading...") {
+// 	isLoading = true;
+// 	topicInput.disabled = true;
+// 	generateIdeasBtn.disabled = true;
+// 	writePostBtn.disabled = true;
 
-	welcomeMessage.classList.add("hidden");
-	imageDisplayContainer.classList.add("hidden");
-	blogDisplayContainer.classList.add("hidden");
-	ideaListContainer.classList.add("hidden");
-	errorDisplay.classList.add("hidden");
+// 	welcomeMessage.classList.add("hidden");
+// 	imageDisplayContainer.classList.add("hidden");
+// 	blogDisplayContainer.classList.add("hidden");
+// 	ideaListContainer.classList.add("hidden");
+// 	errorDisplay.classList.add("hidden");
 
-	loader.classList.remove("hidden");
-	loaderText.textContent = text;
-}
+// }
 
 // Utility function to clear loading state
-function clearLoading() {
-	isLoading = false;
-	topicInput.disabled = false;
-	generateIdeasBtn.disabled = false;
-	writePostBtn.disabled = false;
+// function clearLoading() {
+// 	isLoading = false;
+// 	topicInput.disabled = false;
+// 	generateIdeasBtn.disabled = false;
+// 	writePostBtn.disabled = false;
 
-	loader.classList.add("hidden");
+// 	loader.classList.add("hidden");
 
-	// Show welcome message if no content is displayed
-	if (
-		blogDisplayContainer.classList.contains("hidden") &&
-		imageDisplayContainer.classList.contains("hidden") &&
-		ideaListContainer.classList.contains("hidden")
-	) {
-		welcomeMessage.classList.remove("hidden");
-	}
-}
+// 	// Show welcome message if no content is displayed
+// 	if (
+// 		blogDisplayContainer.classList.contains("hidden") &&
+// 		imageDisplayContainer.classList.contains("hidden") &&
+// 		ideaListContainer.classList.contains("hidden")
+// 	) {
+// 		welcomeMessage.classList.remove("hidden");
+// 	}
+// }
 
 // Utility function to display error
 function displayError(message) {
@@ -73,15 +71,13 @@ function clearContent() {
 // --- Event Handlers ---
 
 generateTitlesBtn.addEventListener("click", async () => {
-	const topic = topicInput.value.trim();
+	const topic = aiTopicInput.value.trim();
 	const token = localStorage.getItem("token");
 
 	if (!topic) {
-		setError("Please enter a topic first.");
+		alert("Please enter a topic first.");
 		return;
 	}
-	clearContent(); // Clear previous content
-	// setLoading("IDEAS", "Brainstorming ideas...");
 	try {
 		const response = await fetch(`${API_BASE_URL}/generate-ideas`, {
 			method: "POST",
@@ -92,10 +88,11 @@ generateTitlesBtn.addEventListener("click", async () => {
 			body: JSON.stringify({ topic }),
 		});
 		const data = await response.json();
+		console.log(data);
 
 		if (response.ok) {
 			try {
-				const parsed = JSON.parse(result);
+				const parsed = JSON.parse(data);
 				titleSuggestions.innerHTML = "";
 				parsed.titles.forEach((title) => {
 					const button = document.createElement("button");
