@@ -1,3 +1,4 @@
+let quill;
 document.addEventListener("DOMContentLoaded", () => {
 	const API_URL = "https://amy-s-blog-backend.onrender.com/api";
 
@@ -9,8 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	const mobileMenuButton = document.getElementById("mobile-menu-button");
 	const sidebar = document.getElementById("sidebar");
 	const overlay = document.getElementById("overlay");
+
+	const blogTopicInput = document.getElementById("blog-title");
+
+	// AI DOM elements
+
 	let visitorsChart;
-	let quill;
 
 	// --- API Helper ---
 	const api = {
@@ -175,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	};
 
-	// --- Blog Management (Full implementation restored) ---
+	// --- Blog Management (Full implementation) ---
 	const blogList = document.getElementById("blog-list");
 	const blogForm = document.getElementById("blog-form");
 	const blogFormTitle = document.getElementById("blog-form-title");

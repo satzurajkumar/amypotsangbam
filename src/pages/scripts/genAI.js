@@ -1,7 +1,9 @@
 // --- AI Assistant Elements ---
 const aiTopicInput = document.getElementById("ai-topic");
+const blogTopicInput = document.getElementById("blog-title");
 const generateTitlesBtn = document.getElementById("generate-titles-btn");
 const generatePostBtn = document.getElementById("generate-post-btn");
+
 const titleSuggestions = document.getElementById("title-suggestions");
 const aiLoader = document.getElementById("ai-loader");
 
@@ -75,9 +77,11 @@ generateTitlesBtn.addEventListener("click", async () => {
 	const token = localStorage.getItem("token");
 
 	if (!topic) {
-		alert("Please enter a topic first.");
+		setError("Please enter a topic first.");
 		return;
 	}
+	aiLoader.classList.remove("hidden");
+	[generateTitlesBtn, generatePostBtn].forEach((btn) => (btn.disabled = true));
 	try {
 		const response = await fetch(`${API_BASE_URL}/generate-ideas`, {
 			method: "POST",
@@ -88,20 +92,20 @@ generateTitlesBtn.addEventListener("click", async () => {
 			body: JSON.stringify({ topic }),
 		});
 		const data = await response.json();
-		console.log(data);
 
 		if (response.ok) {
 			try {
-				const parsed = JSON.parse(data);
+				// const parsed = JSON.parse(data);
+				// console.log(typeof parsed);
 				titleSuggestions.innerHTML = "";
-				parsed.titles.forEach((title) => {
+				data.ideas.forEach((idea) => {
 					const button = document.createElement("button");
 					button.type = "button";
-					button.textContent = title;
+					button.textContent = idea;
 					button.className =
 						"w-full text-left p-2 bg-gray-200 hover:bg-blue-200 rounded-md transition text-sm";
 					button.onclick = () => {
-						document.getElementById("blog-title").value = title;
+						document.getElementById("blog-title").value = idea;
 						titleSuggestions.innerHTML = "";
 					};
 					titleSuggestions.appendChild(button);
@@ -117,42 +121,10 @@ generateTitlesBtn.addEventListener("click", async () => {
 		);
 		console.error("Error generating ideas:", e);
 	} finally {
-		clearLoading();
-	}
-});
-
-writePostBtn.addEventListener("click", async () => {
-	const topic = topicInput.value.trim();
-	const token = localStorage.getItem("token");
-	if (!topic) {
-		setError("Please select or enter a topic first.");
-		return;
-	}
-	clearContent(); // Clear previous content
-	setLoading("POST", "Writing your masterpiece...");
-	try {
-		const response = await fetch(`${API_BASE_URL}/write-post`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify({ topic }),
-		});
-		const data = await response.json();
-
-		if (response.ok) {
-			displayBlogPost(data.post || "");
-		} else {
-			setError(data.error || "Failed to write blog post.");
-		}
-	} catch (e) {
-		setError(
-			"Network error or server unreachable. Is the Node.js API running?"
+		aiLoader.classList.add("hidden");
+		[generateTitlesBtn, generatePostBtn].forEach(
+			(btn) => (btn.disabled = false)
 		);
-		console.error("Error writing post:", e);
-	} finally {
-		clearLoading();
 	}
 });
 
@@ -192,6 +164,63 @@ function displayBlogPost(content) {
 	}
 }
 
+// simple fuction to convert markdown to HTML
+function simpleMarkdownToHtml(markdown) {
+	if (!markdown) return "";
+	return markdown
+		.replace(/^### (.*$)/gim, "<h3>$1</h3>")
+		.replace(/^## (.*$)/gim, "<h2>$1</h2>")
+		.replace(/^# (.*$)/gim, "<h1>$1</h1>")
+		.replace(/\*\*(.*?)\*\*/gim, "<strong>$1</strong>")
+		.replace(/\*(.*?)\*/gim, "<em>$1</em>")
+		.replace(/^\s*\n\*/gm, "<ul>\n*")
+		.replace(/^(\*.+)\s*\n([^*])/gm, "$1\n</ul>\n$2")
+		.replace(/^\* (.*$)/gim, "<li>$1</li>")
+		.replace(/\n/g, "<br />");
+}
+
+// ai generate blog
+generatePostBtn.addEventListener("click", async () => {
+	const topic = blogTopicInput.value.trim();
+	const token = localStorage.getItem("token");
+	if (!topic) {
+		alert("Please select or enter a topic first.");
+		return;
+	}
+	aiLoader.classList.remove("hidden");
+	[generateTitlesBtn, generatePostBtn].forEach((btn) => (btn.disabled = true));
+	// clearContent();
+	// setLoading("POST", "Writing your masterpiece...");
+	try {
+		const response = await fetch(`${API_BASE_URL}/write-post`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({ topic }),
+		});
+		const data = await response.json();
+		console.log(data.post);
+
+		if (response.ok) {
+			quill.clipboard.dangerouslyPasteHTML(0, simpleMarkdownToHtml(data.post));
+		} else {
+			setError(data.error || "Failed to write blog post.");
+		}
+	} catch (e) {
+		setError(
+			"Network error or server unreachable. Is the Node.js API running?"
+		);
+		console.error("Error writing post:", e);
+	} finally {
+		aiLoader.classList.add("hidden");
+		[generateTitlesBtn, generatePostBtn].forEach(
+			(btn) => (btn.disabled = false)
+		);
+	}
+});
+
 function displayImage(imageUrl) {
 	if (imageUrl) {
 		generatedImageElem.src = imageUrl;
@@ -212,6 +241,6 @@ function selectIdeaAsTopic(idea) {
 
 // Initial state on load
 document.addEventListener("DOMContentLoaded", () => {
-	clearLoading(); // Ensure buttons are enabled initially
+	// clearLoading(); // Ensure buttons are enabled initially
 	welcomeMessage.classList.remove("hidden"); // Ensure welcome message is visible
 });
