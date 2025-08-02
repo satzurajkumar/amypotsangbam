@@ -1,6 +1,12 @@
 let quill;
 document.addEventListener("DOMContentLoaded", () => {
-	const API_URL = "https://amy-s-blog-backend.onrender.com/api";
+	// IMPORTANT!!
+	const BACKEND_HOST =
+		window.location.hostname === "127.0.0.1"
+			? "http://localhost:3000"
+			: "https://amy-s-blog-backend.onrender.com";
+
+	const API_URL = `${BACKEND_HOST}/api`;
 
 	// --- DOM Elements ---
 	const loginScreen = document.getElementById("login-screen");
@@ -10,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const mobileMenuButton = document.getElementById("mobile-menu-button");
 	const sidebar = document.getElementById("sidebar");
 	const overlay = document.getElementById("overlay");
+	const loadDataBtn = document.getElementById("loadDataBtn");
 
 	const blogTopicInput = document.getElementById("blog-title");
 
@@ -157,6 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
 			placeholder: "Start writing...",
 		});
 	};
+
+	const loadData = async () => {
+		const response = await api.get("/loadData");
+		if (!response.ok) return;
+		console.log("data Uploaded");
+	};
+	loadDataBtn.addEventListener("click", () => loadData());
 
 	const loadAnalytics = async () => {
 		const response = await api.get("/analytics/visitors");

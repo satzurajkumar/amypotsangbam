@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-	const API_URL = "https://amy-s-blog-backend.onrender.com/api";
+	// IMPORTANT!!
+	const BACKEND_HOST =
+		window.location.hostname === "127.0.0.1"
+			? "http://localhost:3000"
+			: "https://amy-s-blog-backend.onrender.com";
+
+	const API_URL = `${BACKEND_HOST}/api`;
 
 	const loadingState = document.getElementById("loading-state");
 	const blogArticle = document.getElementById("blog-article");

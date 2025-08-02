@@ -10,8 +10,14 @@ const aiLoader = document.getElementById("ai-loader");
 const loaderText = document.getElementById("loaderText");
 const welcomeMessage = document.getElementById("welcomeMessage");
 
-const API_BASE_URL = "https://amy-s-blog-backend.onrender.com/api/googleGenAI"; // Ensure this matches your Node.js server port
+// IMPORTANT!!
+const BACKEND_HOST =
+	window.location.hostname === "127.0.0.1"
+		? "http://localhost:3000"
+		: "https://amy-s-blog-backend.onrender.com";
 
+// const API_BASE_URL = "https://amy-s-blog-backend.onrender.com/api/googleGenAI"; // Ensure this matches your Node.js server port
+const API_BASE_URL = `${BACKEND_HOST}/api/googleGenAI`;
 let isLoading = false; // Flag to manage overall loading state
 
 // Utility function to set loading state

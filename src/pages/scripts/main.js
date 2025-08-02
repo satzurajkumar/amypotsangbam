@@ -83,8 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
 				userAgent: navigator.userAgent,
 			};
 
-			// IMPORTANT: Replace with your actual backend URL
-			const backendUrl = "https://amy-s-blog-backend.onrender.com/api/track";
+			// IMPORTANT!!
+			const BACKEND_HOST =
+				window.location.hostname === "127.0.0.1"
+					? "http://localhost:3000"
+					: "https://amy-s-blog-backend.onrender.com";
+
+			const backendUrl = `${BACKEND_HOST}/api/track`;
 
 			// Send the data to the backend
 			await fetch(backendUrl, {
