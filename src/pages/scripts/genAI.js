@@ -208,7 +208,6 @@ generatePostBtn.addEventListener("click", async () => {
 			body: JSON.stringify({ topic }),
 		});
 		const data = await response.json();
-		console.log(data.post);
 
 		if (response.ok) {
 			quill.clipboard.dangerouslyPasteHTML(0, simpleMarkdownToHtml(data.post));
