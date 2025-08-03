@@ -23,7 +23,7 @@ const DEBOUNCE_DELAY = 300; // milliseconds for autocomplete suggestions
 
 // --- New Validation Constants ---
 const MIN_QUERY_LENGTH = 2; // Minimum number of characters for a valid query
-const VALID_CHARACTERS_REGEX = /^[a-zA-Z0-9\s:-]*$/; // Alphanumeric, spaces, and hyphens
+const VALID_CHARACTERS_REGEX = /^[a-zA-Z0-9\s:!'-]*$/; // Alphanumeric, spaces, and hyphens
 searchButton.addEventListener("click", performSearch);
 searchQueryInput.addEventListener("keypress", (event) => {
 	if (event.key === "Enter") {
