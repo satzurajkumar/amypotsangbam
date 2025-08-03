@@ -3,8 +3,10 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"dev": "tailwindcss -i ./src/styles/main.css -o ./src/styles/output.css --watch",
-		"build": "npx tailwindcss -i ./src/styles/main.css -o ./src/styles/output.css --minify"
+		"dev": "tailwindcss -i ./src/pages/styles/main.css -o ./src/pagesstyles/minified.css --watch",
+		"build": "npx tailwindcss -i ./src/pages/styles/main.css -o ./src/pages/styles/minified.css --minify",
+		"build:dev": "postcss src/pages/styles/main.css -o dist/main_minified.css",
+		"build:prod": "set NODE_ENV=production postcss src/pages/styles/main.css -o dist/pages/styles/main_minified.css"
 	},
 	"keywords": [],
 	"author": "",
@@ -13,5 +15,8 @@
 	"dependencies": {
 		"@tailwindcss/cli": "^4.1.11",
 		"tailwindcss": "^4.1.11"
+	},
+	"devDependencies": {
+		"cssnano": "^7.1.0"
 	}
 }
