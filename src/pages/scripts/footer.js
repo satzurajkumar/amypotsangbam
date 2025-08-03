@@ -103,8 +103,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const instaLink = document.createElement("a");
 	instaLink.setAttribute("href", "https://www.instagram.com/amy_potsangbam");
+	// visually hidden text
+	const hiddenText = document.createElement("span");
+	hiddenText.classList.add("sr-only"); // Apply the visually hidden class
+	hiddenText.textContent = "Instagram";
 	const instaIcon = document.createElement("i");
 	instaIcon.classList.add("fa-brands", "fa-instagram");
+
+	// Append the hidden text and the icon to the link
+	instaLink.appendChild(hiddenText);
 	instaLink.appendChild(instaIcon);
 	instagramIcon.appendChild(instaLink);
 });
