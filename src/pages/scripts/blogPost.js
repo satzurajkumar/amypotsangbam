@@ -15,13 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {
 	const postDate = document.getElementById("post-date");
 	const postContent = document.getElementById("post-content");
 
+	// Recommended posts elements
+	const recommendedContainer = document.getElementById(
+		"recommended-posts-container"
+	);
+
+	const params = new URLSearchParams(window.location.search);
+	const postId = params.get("id");
+
 	/**
 	 * Fetches a single blog post by its ID and renders it.
 	 */
 	const fetchSinglePost = async () => {
 		// Get post ID from URL (e.g., ?id=1)
-		const params = new URLSearchParams(window.location.search);
-		const postId = params.get("id");
 
 		if (!postId) {
 			showError();
@@ -62,6 +68,43 @@ document.addEventListener("DOMContentLoaded", () => {
 		loadingState.classList.add("hidden");
 		errorMessage.classList.remove("hidden");
 	};
+
+	const fetchRecommendedPosts = async () => {
+		try {
+			const response = await fetch(`${API_URL}/blogs/${postId}/recommended`);
+			if (!response.ok) throw new Error("Could not fetch recommendations");
+			const recommendedPosts = await response.json();
+
+			renderRecommendedPosts(recommendedPosts);
+		} catch (error) {
+			console.error("Error fetching recommendations:", error);
+			recommendedContainer.innerHTML = `<p class="text-sm text-gray-500">Could not load recommendations.</p>`;
+		}
+	};
+
+	const renderRecommendedPosts = (posts) => {
+		recommendedContainer.innerHTML = ""; // Clear skeletons
+		if (posts.length === 0) {
+			recommendedContainer.innerHTML = `<p class="text-sm text-gray-500">No related articles found.</p>`;
+			return;
+		}
+		const list = document.createElement("ul");
+		list.className = "space-y-3";
+		posts.forEach((post) => {
+			const item = document.createElement("li");
+			// STYLING UPDATE: Added classes to the <a> tag for background, shadow, and hover effects.
+			item.innerHTML = `<a href="blog-post.html?id=${post.id}" class="block p-3 bg-gray-100 rounded-md shadow-sm hover:bg-blue-100 hover:shadow-md transition-all duration-200 text-gray-700 hover:text-secondary font-medium">${post.title}</a>`;
+			list.appendChild(item);
+		});
+		recommendedContainer.appendChild(list);
+	};
+
+	if (postId) {
+		fetchSinglePost();
+		fetchRecommendedPosts();
+	} else {
+		showError();
+	}
 
 	fetchSinglePost();
 });
