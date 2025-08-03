@@ -105,5 +105,5 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 
 	// Call the tracking function on page load
-	trackVisitor();
+	// trackVisitor();
 });
