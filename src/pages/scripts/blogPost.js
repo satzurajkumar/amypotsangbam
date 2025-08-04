@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	const postDate = document.getElementById("post-date");
 	const postContent = document.getElementById("post-content");
 
+	const readMoreContainer = document.getElementById("read-more-container");
+	const readMoreButton = document.getElementById("read-more-btn");
+
 	// Recommended posts elements
 	const recommendedContainer = document.getElementById(
 		"recommended-posts-container"
@@ -36,15 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		try {
 			const response = await fetch(`${API_URL}/blogs/${postId}`);
-
-			if (!response.ok) {
-				throw new Error("Post not found");
-			}
-
+			if (!response.ok) throw new Error("Post not found");
 			const post = await response.json();
 
-			// Populate the page with the fetched data
-			document.title = post.title; // Update the page tab title
+			document.title = post.title;
 			postTitle.textContent = post.title;
 			postDate.textContent = `Published on ${new Date(
 				post.created_at
@@ -53,9 +51,22 @@ document.addEventListener("DOMContentLoaded", () => {
 				month: "long",
 				day: "numeric",
 			})}`;
-			postContent.innerHTML = post.content; // Use .innerHTML to render any HTML in the content
+			postContent.innerHTML = post.content;
 
-			// Show the article and hide loading state
+			// --- "Read More" Logic ---
+			// Use textContent to get a plain text representation for word counting
+			const wordCount = postContent.textContent.trim().split(/\s+/).length;
+			if (wordCount > 180) {
+				postContent.classList.add("truncated");
+				readMoreContainer.classList.remove("hidden");
+
+				readMoreButton.addEventListener("click", () => {
+					postContent.classList.remove("truncated");
+					readMoreContainer.classList.add("hidden");
+				});
+			}
+			// --- End of "Read More" Logic ---
+
 			loadingState.classList.add("hidden");
 			blogArticle.classList.remove("hidden");
 		} catch (error) {

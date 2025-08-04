@@ -46,6 +46,35 @@
 		<link rel="stylesheet" href="./styles/output.css" />
 		<link rel="stylesheet" href="./styles/main.css" />
 		<link rel="stylesheet" href="./styles/blogPost.css" />
+
+		<style>
+			/* Styles for the blog content area for better readability */
+			.blog-content h2 {
+				font-size: 1.875rem;
+				margin-top: 2rem;
+				margin-bottom: 1rem;
+			}
+			.blog-content p {
+				margin-bottom: 1.5rem;
+				line-height: 1.75;
+			}
+			.blog-content a {
+				color: var(--color-secondary);
+				text-decoration: underline;
+			}
+			.blog-content ul {
+				list-style-type: disc;
+				padding-left: 1.5rem;
+				margin-bottom: 1.5rem;
+			}
+
+			/* Styles for the "Read More" functionality */
+			.blog-content.truncated {
+				max-height: 40rem; /* Adjust this value to control the initial visible height */
+				overflow: hidden;
+				position: relative;
+			}
+		</style>
 	</head>
 	<!-- Google tag (gtag.js) -->
 	<script
@@ -97,6 +126,21 @@
 								<p id="post-date" class="text-gray-500 mt-4"></p>
 							</header>
 							<div id="post-content" class="blog-content mt-8 text-lg"></div>
+							<!-- "Read More" button and gradient overlay container -->
+							<div
+								id="read-more-container"
+								class="hidden relative -mt-24 pt-24 text-center"
+							>
+								<div
+									class="absolute inset-0 bg-gradient-to-t from-white to-transparent"
+								></div>
+								<button
+									id="read-more-btn"
+									class="relative bg-secondary text-white font-bold py-3 px-8 rounded-md hover:bg-opacity-90 transition-colors"
+								>
+									Read More
+								</button>
+							</div>
 						</article>
 						<!-- Error Message -->
 						<div id="error-message" class="hidden text-center">
@@ -105,7 +149,7 @@
 								Sorry, we couldn't find the post you were looking for.
 							</p>
 							<a
-								href="blog.html"
+								href="blogs.html"
 								class="inline-block mt-6 text-secondary font-semibold hover:underline"
 								>&larr; Back to all posts</a
 							>
@@ -120,13 +164,12 @@
 							</h3>
 							<div id="recommended-posts-container" class="space-y-4">
 								<!-- Recommended posts will be dynamically inserted here -->
-								<!-- Loading Skeletons for sidebar -->
 								<div
-									class="animate-pulse h-10 bg-gray-200 rounded w-full"
+									class="animate-pulse h-12 bg-gray-200 rounded w-full"
 								></div>
-								<div class="animate-pulse h-10 bg-gray-200 rounded w-5/6"></div>
+								<div class="animate-pulse h-12 bg-gray-200 rounded w-5/6"></div>
 								<div
-									class="animate-pulse h-10 bg-gray-200 rounded w-full"
+									class="animate-pulse h-12 bg-gray-200 rounded w-full"
 								></div>
 							</div>
 						</div>
